@@ -1,142 +1,29 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import {Context as EventContext } from '../context/EventContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 import Beaker from '../assets/beaker.png';
-
-const stations = [
-  {
-      "clue": "Clueeeee",
-      "station": "S",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "P",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "D",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "F",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "G",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "H",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "I",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "J",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-      "clue": "Clueeeee",
-      "station": "K",
-      "answer1": "",
-      "answer2": "",
-      "c_answer1": "A",
-      "c_answer2": 11.1,
-      "score1": 0,
-      "score2": 0,
-      "attempt": 0,
-  },
-  {
-    "clue": "Clueeeee",
-    "station": "L",
-    "answer1": "",
-    "answer2": "",
-    "c_answer1": "A",
-    "c_answer2": 11.1,
-    "score1": 0,
-    "score2": 0,
-    "attempt": 0,
-},
-] 
-
-// need pop up on begin() requesting name
+import Names from '../components/Names';
 
 function Home() {
-  
-  const { randomize_questions } = useContext(EventContext)
-  
+  const { state } = useContext(EventContext)
   function NewLineText(bio) {
       let splitLines = bio.split(`\n`)
       const finalLines = splitLines.map((number, ind) => <p key={ind}>{number}</p>)
       return finalLines
   }
+  const [needName, setNeedName] = useState(false)
   const history = useHistory();
   const begin = () => {
-    randomize_questions(stations)
-    history.push('/Event')
+    if ( state.names.name1 !== '' ){
+      history.push('/Event')
+      setNeedName(false)
+    } else {
+      setNeedName(true)
+    }
   }
 
   const instructions = `Press begin below to start the hunt!`
@@ -157,7 +44,10 @@ function Home() {
           <div className="home-columns">
             {NewLineText(instructions)}
           </div>
-
+          {
+            needName ? <p style={{color: 'red'}}>Please enter at least one name in the top left box to begin.</p> : null
+          }
+        <Names/>
           <>
             <Button variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} onClick={() => begin() }>Begin!</Button>
           </>

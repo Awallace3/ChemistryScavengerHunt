@@ -31,15 +31,11 @@ const EventQuestion = () => {
     } = useContext(EventContext)
     
     const station = state.stations[state.position];
-    console.log("Station:", station)    
     function submission() {
         setAttempts(attempts+1)
         submit_answers(attempts)
         count_total_score()
     }
-    // useEffect(() => {
-    //     count_total_score()
-    // }, [attempts])
 
     if (isMobile) {
         return (

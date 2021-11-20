@@ -8,15 +8,15 @@ function shuffle(array) {
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
-  
     return array;
 }
 
-function eval_math(answer2, c_answer2) {
+function eval_math(answer2, c_answer2, percent_error) {
     var a = parseFloat(answer2)
     var b = parseFloat(c_answer2)
-    var plus_minus = b * 0.02
-    if (a > b-plus_minus && a < b+plus_minus){
+    console.log("numbers", a, b)
+    var plus_minus = b * percent_error
+    if (a >= b-plus_minus && a <= b+plus_minus){
         return true
     } else{
         return false
@@ -51,7 +51,7 @@ const eventReducer = (state, action) => {
                     }
                 }
             }
-            a2 = eval_math(state.stations[state.position].answer2, state.stations[state.position].c_answer2)
+            a2 = eval_math(state.stations[state.position].answer2, state.stations[state.position].c_answer2, state.stations[state.position].percent_error)
             if (a2 && state.stations[state.position].score2 === 0){
                 switch(action.payload){
                     case 0:
@@ -96,6 +96,10 @@ const eventReducer = (state, action) => {
             }
             return{...state, gScore: u_gScore}
 
+        case 'update_names':
+            var u_names = state.names
+            u_names[action.payload.name_num] = action.payload.u_name
+            return {...state, names: u_names}
         default:
             return state;
     }
@@ -121,19 +125,72 @@ const count_total_score = (dispatch) => () => {
     dispatch({type: 'count_total_score'})
 }
 
+const update_names = (dispatch) => (u_name, name_num) => {
+    dispatch({type: 'update_names', payload: {u_name, name_num }})
+}
+
 export const { Provider, Context } = createDataContext(
     eventReducer,
     { 
         randomize_questions, update_answer,
         submit_answers, next_question,
-        count_total_score,
+        count_total_score, update_names
     },
     { 
-        //stations: [],
         position: 0,
         correct1: false, correct2: false,
-        complete: false, gScore: {curScore: 0, totScore: 150},
+        complete: false, 
+        /*
+        names: {
+            "name1": "",
+            "name2": "",
+            "name3": "",
+            "name4": "",
+        },
+        */
+        gScore: {
+            curScore: 0, 
+            totScore: 150
+        },
+        names: {
+            "name1": "a",
+            "name2": "b",
+            "name3": "c",
+            "name4": "d",
+        },
         stations: shuffle([
+            {
+                "clue": "Clueeeee",
+                "station": "S",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.00
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "P",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.05
+            }
+          ])
+          //
+    }
+) 
+
+
+/*
+ stations: shuffle([
             {
                 "clue": "Clueeeee",
                 "station": "S",
@@ -245,7 +302,4 @@ export const { Provider, Context } = createDataContext(
               "attempt": 0,
           },
           ])
-          
-    }
-) 
-
+*/

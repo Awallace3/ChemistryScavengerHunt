@@ -1,0 +1,38 @@
+{
+	"gScore": {
+		"curScore": 0, 
+		"totScore": 150
+	},
+	"names": {
+		"name1": "a",
+		"name2": "b",
+		"name3": "c",
+		"name4": "d"
+	},
+	"stations": [
+		{
+			"clue": "Clueeeee",
+			"station": "S",
+			"answer1": "",
+			"answer2": "",
+			"c_answer1": "A",
+			"c_answer2": 11.1,
+			"score1": 0,
+			"score2": 0,
+			"attempt": 0,
+			"percent_error": 0.05
+		},
+		{
+			"clue": "Clueeeee",
+			"station": "P",
+			"answer1": "",
+			"answer2": "",
+			"c_answer1": "A",
+			"c_answer2": 11.1,
+			"score1": 0,
+			"score2": 0,
+			"attempt": 0,
+			"percent_error": 0.05
+		}
+	]
+}
