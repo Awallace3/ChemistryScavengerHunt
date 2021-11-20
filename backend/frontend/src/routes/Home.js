@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import {Context as EventContext } from '../context/EventContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Nav from '../Nav'
 
 import Beaker from '../assets/beaker.png';
 
@@ -18,7 +17,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -28,7 +28,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -38,7 +39,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -48,7 +50,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -58,7 +61,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -68,7 +72,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -78,7 +83,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -88,7 +94,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -98,7 +105,8 @@ const stations = [
       "answer2": "",
       "c_answer1": "A",
       "c_answer2": 11.1,
-      "score": 0,
+      "score1": 0,
+      "score2": 0,
       "attempt": 0,
   },
   {
@@ -108,7 +116,8 @@ const stations = [
     "answer2": "",
     "c_answer1": "A",
     "c_answer2": 11.1,
-    "score": 0,
+    "score1": 0,
+    "score2": 0,
     "attempt": 0,
 },
 ] 

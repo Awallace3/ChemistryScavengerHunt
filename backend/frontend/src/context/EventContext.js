@@ -2,7 +2,7 @@ import createDataContext from './createDataContext';
 
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
       [array[currentIndex], array[randomIndex]] = [
@@ -36,10 +36,39 @@ const eventReducer = (state, action) => {
             let a2 = false
             let u_stations2 = state.stations
             
-            if (state.stations[state.position].answer1 == state.stations[state.position].c_answer1){
+            if (state.stations[state.position].answer1 === state.stations[state.position].c_answer1){
                 a1 = true
+                if (state.stations[state.position].score1 === 0){
+                    switch(action.payload){
+                        case 0:
+                            u_stations2[state.position].score1 = 5
+                            break;
+                        case 1:
+                            u_stations2[state.position].score1 = 3
+                            break;
+                        default:
+                            u_stations2[state.position].score1 = 1
+                    }
+                }
             }
             a2 = eval_math(state.stations[state.position].answer2, state.stations[state.position].c_answer2)
+            if (a2 && state.stations[state.position].score2 === 0){
+                switch(action.payload){
+                    case 0:
+                        u_stations2[state.position].score2 = 10
+                        break;
+                    case 1:
+                        u_stations2[state.position].score2 = 7
+                        break;
+                    case 2:
+                        u_stations2[state.position].score2 = 4
+                        break;
+                    default:
+                        u_stations2[state.position].score2 = 1
+
+                    }
+                }
+            
             // 2% error
             return {
                 ...state, stations: u_stations2, 
@@ -58,6 +87,14 @@ const eventReducer = (state, action) => {
                     ...state, stations: u_stations3, complete: true
                 }
             }
+        case 'count_total_score':
+            var u_gScore = state.gScore
+            u_gScore.curScore = 0
+            for (var i=0; i<state.stations.length-1; i++ ){
+                u_gScore.curScore += state.stations[i].score1
+                u_gScore.curScore += state.stations[i].score2
+            }
+            return{...state, gScore: u_gScore}
 
         default:
             return state;
@@ -72,12 +109,16 @@ const update_answer = (dispatch) => (answer, ansNum) => {
     dispatch({type: 'answer', payload: {answer, ansNum}})
 } 
 
-const submit_answers = (dispatch) => () => {
-    dispatch({type: 'submit'})
+const submit_answers = (dispatch) => (attempts) => {
+    dispatch({type: 'submit', payload: attempts})
 }
 
 const next_question = (dispatch) => (attempts) => {
     dispatch({type: 'next_question', payload: attempts})
+}
+
+const count_total_score = (dispatch) => () => {
+    dispatch({type: 'count_total_score'})
 }
 
 export const { Provider, Context } = createDataContext(
@@ -85,10 +126,126 @@ export const { Provider, Context } = createDataContext(
     { 
         randomize_questions, update_answer,
         submit_answers, next_question,
+        count_total_score,
     },
     { 
-        stations: [], position: 0,
+        //stations: [],
+        position: 0,
         correct1: false, correct2: false,
-        complete: false
+        complete: false, gScore: {curScore: 0, totScore: 150},
+        stations: shuffle([
+            {
+                "clue": "Clueeeee",
+                "station": "S",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "P",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "D",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "F",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "G",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "H",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "I",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "J",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+                "clue": "Clueeeee",
+                "station": "K",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 11.1,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+            },
+            {
+              "clue": "Clueeeee",
+              "station": "L",
+              "answer1": "",
+              "answer2": "",
+              "c_answer1": "A",
+              "c_answer2": 11.1,
+              "score1": 0,
+              "score2": 0,
+              "attempt": 0,
+          },
+          ])
+          
     }
 ) 
+

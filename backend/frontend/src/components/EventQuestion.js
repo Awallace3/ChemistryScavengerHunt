@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';
@@ -26,15 +26,20 @@ const EventQuestion = () => {
     const [textInput, setTextInput] = useState('')
     const { 
         state, update_answer, 
-        submit_answers, next_question
+        submit_answers, next_question,
+        count_total_score
     } = useContext(EventContext)
-
-    const station = state.stations[state.position];
     
+    const station = state.stations[state.position];
+    console.log("Station:", station)    
     function submission() {
         setAttempts(attempts+1)
-        submit_answers()
+        submit_answers(attempts)
+        count_total_score()
     }
+    // useEffect(() => {
+    //     count_total_score()
+    // }, [attempts])
 
     if (isMobile) {
         return (
@@ -49,7 +54,7 @@ const EventQuestion = () => {
                 <p>Input:</p>
                 <form>
                     <div className="radio">
-                    <label>
+                    
                         <input
                         type="radio"
                         value="A"
@@ -57,10 +62,10 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         A
-                    </label>
+                    
                     </div>
                     <div className="radio">
-                    <lablel>
+                    
                         <input
                         type="radio"
                         value="B"
@@ -68,10 +73,10 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         B
-                    </lablel>
+                    
                     </div>
                     <div className="radio">
-                    <label>
+                    
                         <input
                         type="radio"
                         value="C"
@@ -79,10 +84,10 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         C
-                    </label>
+                    
                     </div>
                     <div className="radio">
-                    <label>
+                    
                         <input
                         type="radio"
                         value="D"
@@ -90,7 +95,7 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         D
-                    </label>
+                    
                     </div>
                     <div className="radio">
                     <label>
@@ -141,6 +146,17 @@ const EventQuestion = () => {
                         setAttempts(0)
                     }
                 }>Next Question!</Button>
+                ) : (null)
+            }
+
+            {
+                (!state.correct1 || !state.correct2) && attempts > 3 ? (
+                    <Button variant="btn btn-success" onClick={() => {
+                        next_question(attempts) 
+                        setTextInput("")
+                        setAttempts(0)
+                    }
+                }>Give up</Button>
                 ) : (null)
             }
 

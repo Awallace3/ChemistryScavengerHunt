@@ -1,8 +1,5 @@
 import React from 'react';
 import './App.css';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import { slide as Menu } from 'react-burger-menu';
 import { Navbar, Container} from 'react-bootstrap'
 
 import UMiss from './assets/acknowledgements/umiss.png'
