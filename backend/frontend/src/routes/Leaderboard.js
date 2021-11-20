@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
-import { Button } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
 import {Context as EventContext } from '../context/EventContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Beaker from '../assets/beaker.png';
@@ -10,10 +8,6 @@ import Beaker from '../assets/beaker.png';
 function Leaderboard() {
 
   const { state} = useContext(EventContext)
-
-  const display_names = (names) => {
-    
-  }
   
   if (isMobile) {
     return (

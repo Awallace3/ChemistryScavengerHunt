@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, } from 'react'
 import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';

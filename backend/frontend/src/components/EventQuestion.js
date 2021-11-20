@@ -1,10 +1,10 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, } from 'react'
 import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
 import Atom from '../assets/atom.png'
-import { height } from 'dom-helpers';
+
 
 const eval_to_user = (attempt, err) => {
     if(attempt > 0){
@@ -44,7 +44,7 @@ const EventQuestion = () => {
        
            <div className="event-container">
 
-            <img src={Atom} style={{alignSelf: "center", width: "100px", heiht: "auto"}}/>
+            <img src={Atom} alt='AtomImage' style={{alignSelf: "center", width: "100px", heiht: "auto"}}/>
 
             <div className="event-header-container">
               <p>Station: {station.station}</p>
@@ -136,7 +136,7 @@ const EventQuestion = () => {
             <Button variant="btn btn-success" style={{marginTop: "5%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}onClick={(e) => submission() }>Submit Answers!</Button>
 
             {
-                state.correct1 && state.correct2 && attempts > 0 ? (
+                state.correct1 && state.correct2 && attempts > 0 && (state.position < state.stations.length - 1) ? (
                     <Button variant="btn btn-success" style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}} onClick={() => {
                         next_question(attempts) 
                         setTextInput("")
@@ -147,8 +147,10 @@ const EventQuestion = () => {
             }
 
             {
-                (!state.correct1 || !state.correct2) && attempts > 3 ? (
-                    <Button variant="btn btn-success" onClick={() => {
+                (!state.correct1 || !state.correct2) && attempts > 3 && !state.complete ? (
+                    <Button variant="btn btn-success"
+                    style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}
+                    onClick={() => {
                         next_question(attempts) 
                         setTextInput("")
                         setAttempts(0)
