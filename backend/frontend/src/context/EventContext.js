@@ -160,7 +160,7 @@ export const { Provider, Context } = createDataContext(
         },
         stations: shuffle([
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "S",
                 "answer1": "",
                 "answer2": "",
@@ -203,7 +203,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "P",
                 "answer1": "",
                 "answer2": "",
@@ -214,7 +214,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "D",
                 "answer1": "",
                 "answer2": "",
@@ -225,7 +225,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "F",
                 "answer1": "",
                 "answer2": "",
@@ -236,7 +236,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "G",
                 "answer1": "",
                 "answer2": "",
@@ -247,7 +247,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "H",
                 "answer1": "",
                 "answer2": "",
@@ -258,7 +258,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "I",
                 "answer1": "",
                 "answer2": "",
@@ -269,7 +269,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "J",
                 "answer1": "",
                 "answer2": "",
@@ -280,7 +280,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-                "clue": "Clueeeee",
+                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
                 "station": "K",
                 "answer1": "",
                 "answer2": "",
@@ -291,7 +291,7 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
             },
             {
-              "clue": "Clueeeee",
+              "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
               "station": "L",
               "answer1": "",
               "answer2": "",

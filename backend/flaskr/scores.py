@@ -20,15 +20,18 @@ def submit_scores():
 
 		if error is None:
 			try:
+				namesDict = content["names"]
+				gScore = content["gScore"]
+
 				db.execute(
-					"INSERT INTO user (username, total) VALUES (?, ?)",
-				(content["name"], content["total"])),
+					"INSERT INTO user (username, user2, user3, user4, curscore, totalscore) VALUES (?, ?, ?, ?, ?, ?)",
+				(namesDict["name1"], namesDict["name2"], namesDict["name3"], namesDict["name4"], gScore["curScore"], gScore["totScore"])),
 				db.commit()
 
 				for x in content["stations"]:
 					db.execute(
-					"INSERT INTO stations (username, station, answer1, answer2, score, attempt) VALUES (?, ?, ?, ?, ?, ?)",
-					(content["name"], x["station"], x["answer1"], x["answer2"], x["score"], x["attempt"])),
+					"INSERT INTO stations (username, clue, station, answer1, answer2, canswer1, canswer2, score1, score2, attempt, percentError) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					(namesDict["name1"], x["clue"], x["station"], x["answer1"], x["answer2"], x["c_answer1"], x["c_answer2"], x["score1"], x["score2"], x["attempt"], x["percent_error"])),
 					
 					# print(content["name"], x["station"], x["answer1"], x["answer2"], x["score"], x["attempt"]),
 
