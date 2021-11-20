@@ -8,7 +8,7 @@ import EventQuestion from '../components/EventQuestion';
 
 function Event() {
 
-  const { state} = useContext(EventContext)
+  const { state } = useContext(EventContext)
 
   useEffect(() => {
     console.log("state", state)
@@ -21,6 +21,7 @@ function Event() {
           <EventQuestion/>
         </div>
       )
+
     } else {
       return ( 
         <div className="background-container">
