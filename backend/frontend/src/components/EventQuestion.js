@@ -45,7 +45,7 @@ const EventQuestion = () => {
                     <label>
                         <input
                         type="radio"
-                        value="A"
+                        value="C"
                         checked={station.answer1 === "C"}
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
@@ -56,7 +56,7 @@ const EventQuestion = () => {
                     <label>
                         <input
                         type="radio"
-                        value="A"
+                        value="D"
                         checked={station.answer1 === "D"}
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
@@ -67,7 +67,7 @@ const EventQuestion = () => {
                     <label>
                         <input
                         type="radio"
-                        value="A"
+                        value="E"
                         checked={station.answer1 === "E"}
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
