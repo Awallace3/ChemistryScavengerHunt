@@ -425,3 +425,8 @@ html, body {
   font-size: 1.25em;
   font-family: "Raleway";
 }
+
+.home-buttons {
+  align-self: "center"; 
+  background-color: "#f3f3f3";
+}

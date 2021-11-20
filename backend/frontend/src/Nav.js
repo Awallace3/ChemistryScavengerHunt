@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar, Container} from 'react-bootstrap'
 import UMiss from './assets/acknowledgements/umiss.png'
 import { useHistory } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 function Nav() {
   const history = useHistory();
@@ -13,21 +14,21 @@ function Nav() {
 <>
   <Navbar className="color-nav">
   <Container>
-    <button style={{alignSelf: "center", backgroundColor: "white", borderColor: "white"}} onClick={() =>{
+    <Button variant="secondary" size="sm" style={{alignSelf: "center", borderColor: "#f3f3f3", backgroundColor: "#3c1874"}} onClick={() =>{
       linkPage('/')
     }}>
       Home
-    </button>
-    <button style={{alignSelf: "center", backgroundColor: "white", borderColor: "white"}} onClick={() =>{
+    </Button>
+    <Button variant="secondary" size="sm" style={{alignSelf: "center", borderColor: "#f3f3f3", backgroundColor: "#3c1874"}} onClick={() =>{
       linkPage('/Event')
     }}>
       Event
-    </button>
-    <button style={{alignSelf: "center", backgroundColor: "white", borderColor: "white"}} onClick={() =>{
+    </Button>
+    <Button variant="secondary" size="sm" style={{alignSelf: "center", borderColor: "#f3f3f3", backgroundColor: "#3c1874"}} onClick={() =>{
       linkPage('/Leaderboard')
     }}>
       Leaderboard
-    </button>
+    </Button>
       <img
         src={UMiss}
         height="30"

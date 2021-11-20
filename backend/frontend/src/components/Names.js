@@ -19,7 +19,7 @@ const Names = () => {
     if (isMobile) {
         return (
         
-      <div style={{flexDirection: 'row'}}>
+      <div style={{display: 'flex', flexDirection: 'column', width: '80%', alignSelf: 'center', marginBottom: "4%"}}>
           Enter names for up to 4 group members
               <input
                     value={names.name1}
