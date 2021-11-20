@@ -339,3 +339,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1.25rem;
 }
+
+.color-nav {
+  background-color: #283747;
+}

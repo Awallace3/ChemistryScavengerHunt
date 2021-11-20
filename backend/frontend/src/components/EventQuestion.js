@@ -23,6 +23,7 @@ const eval_to_user = (attempt, err) => {
 
 const EventQuestion = () => {
     const [attempts, setAttempts] = useState(0)
+    const [textInput, setTextInput] = useState('')
     const { 
         state, update_answer, 
         submit_answers, next_question
@@ -112,7 +113,16 @@ const EventQuestion = () => {
 
               <div style={{flexDirection: 'row'}}>
                 <p>Input:</p>
-                <input type="text" onChange={(answer) => update_answer(answer.target.value, 'answer2')}/>
+                <input 
+                    type="text" 
+                    onChange={(answer) => {
+                        update_answer(answer.target.value, 'answer2')
+                        setTextInput(answer.target.value)
+                    }
+                    }
+                    value={textInput}
+                    
+                    />
                 {eval_to_user(attempts, state.correct2)}
               </div>
             
@@ -125,7 +135,12 @@ const EventQuestion = () => {
 
             {
                 state.correct1 && state.correct2 && attempts > 0 ? (
-                    <Button variant="btn btn-success" onClick={() => next_question(attempts) }>Next Question!</Button>
+                    <Button variant="btn btn-success" onClick={() => {
+                        next_question(attempts) 
+                        setTextInput("")
+                        setAttempts(0)
+                    }
+                }>Next Question!</Button>
                 ) : (null)
             }
 

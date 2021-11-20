@@ -3,38 +3,27 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { slide as Menu } from 'react-burger-menu';
+import { Navbar, Container} from 'react-bootstrap'
 
+import UMiss from './assets/acknowledgements/umiss.png'
 
 function Nav() {
-    if (isMobile) {
-        return (
-            <Menu>
-                <a id="home" className="menu-item" href="/"> Home </a>
-            </Menu>
-            )
-    } else {
-
-  return (
-    <nav>
-        <div className="Nav-container">
-        {/*<img src={GroupLogo} alt='grouplogo' width='50' height='60' />*/}
-        <ul>
-            <Link className="link-no-dec" to='/'>
-                <li>HOME</li>
-            </Link>
-            {
-                /*
-                <Link className="link-no-dec" to='/Event'>
-                   <li>EVENT</li>
-               </Link>
-                */
-            }
-        </ul>
-
-        </div>
-    </nav>
-  );
-}
+    return (
+<>
+  <Navbar className="color-nav">
+  <Container>
+    <Navbar.Brand href="/">
+      <img
+        src={UMiss}
+        height="30"
+        className="d-inline-block align-top"
+        alt="React Bootstrap logo"
+      />
+    </Navbar.Brand>
+  </Container>
+  </Navbar>
+</>
+    )
 }
 
 export default Nav;

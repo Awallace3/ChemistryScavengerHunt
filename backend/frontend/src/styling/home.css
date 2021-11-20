@@ -1,14 +1,14 @@
 .background-container {
   display: flex;
   flex-direction: column;
-  background-color: #3f3d3b;
+  background-color: #f3f3f3;
   min-height: 100vh;
 }
 
 .eventQuestion-container {
   display: flex;
   flex-direction: column;
-  background-color: yellow;
+  background-color: grey;
   min-height: 100vh;
 }
 
@@ -17,27 +17,39 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    box-shadow: 3px 3px 3px grey;
-    border: 1px solid black;
-    background-color: #555251;
-    border-radius: 15px;
-    margin-top: 5vh;
     width: 80vw;
+    height: auto;
+    margin-top: 12.5%;
 }
 
 .home-text h1 {
     font-size: 3em;
-    color: white;
+    color: #3c1874;
     justify-content: center;
     letter-spacing: 3px;
     margin: 5px;
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+.home-text img {
+  display: inline-block;
+  height: auto;
+  max-width: 20vw;
+  margin-right: 2%;
+}
+
+.home-text-border-box {
+  display: block;
+  align-content: space-between;
+  padding: 7.5%;
+  margin-bottom: 5%;
 }
 
 .home-columns {
   display: flex;
   flex-direction: row;
   padding: 2%;
-  margin-top: 1vh;
   align-items: center;
   justify-content: center;
 }

@@ -4,6 +4,11 @@ import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
 import {Context as EventContext } from '../context/EventContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Nav from '../Nav'
+
+import Beaker from '../assets/beaker.png';
 
 const stations = [
   {
@@ -125,21 +130,28 @@ function Home() {
     history.push('/Event')
   }
 
-  const instructions = `After pressing begin, your quest begins.`
-    if (isMobile) {
-      return (
+  const instructions = `Press begin below to start the hunt!`
+  if (isMobile) {
+    return (
         <div className="background-container"> 
      
          <div className="home-text">
+            <div className="home-text-border-box" >
+              <img src={Beaker} alt="beaker" />
+              <img src={Beaker} alt="beaker" />
+              <img src={Beaker} alt="beaker" />
+            </div>
             <h1 style={{fontSize: "2rem", margin: "0"}}> SMACS 2021</h1>
             <h1 style={{fontSize: "2rem", margin: "0"}}> Scavenger Hunt</h1>
           </div>
-          <form>
-            <Button variant="btn btn-success" onClick={() => begin() }>Begin!</Button>
-          </form>
-          <div className="mobile-home-box">
+
+          <div className="home-columns">
             {NewLineText(instructions)}
           </div>
+
+          <>
+            <Button variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} onClick={() => begin() }>Begin!</Button>
+          </>
 
     
         </div>
@@ -150,7 +162,8 @@ function Home() {
          
 
           <div className='home-text'>
-            <h1> SMACS 2021 </h1> <h1> Scavenger Hunt </h1>
+            <h1> SMACS 2021 </h1> 
+            <h1> Scavenger Hunt </h1>
           </div>
 
           <form>

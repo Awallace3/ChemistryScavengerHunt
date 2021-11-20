@@ -14,7 +14,6 @@ function App() {
                 <meta charSet="utf-8" />
                 <title>SMACS Scavenger Hunt</title>
       </Helmet>
-
     <Nav />
     <Switch>
       <Route path="/" exact component={Home} />

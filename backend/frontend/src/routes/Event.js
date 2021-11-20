@@ -17,6 +17,7 @@ function Event() {
           <EventQuestion/>
         </div>
       )
+
     } else {
       return ( 
         <div className="background-container">
