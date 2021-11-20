@@ -34,6 +34,8 @@ const update_answer = (dispatch) => (answer, ansNum) => {
     dispatch({type: 'answer', payload: {answer, ansNum}})
 } 
 
+//const submit_answers = (dispatch) => 
+
 
 export const { Provider, Context } = createDataContext(
     eventReducer,

@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';
+import { Button } from 'react-bootstrap';
 
 const EventQuestion = () => {
 
@@ -33,7 +34,7 @@ const EventQuestion = () => {
                     </label>
                     </div>
                     <div className="radio">
-                    <label>
+                    <lablel>
                         <input
                         type="radio"
                         value="B"
@@ -41,7 +42,7 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         B
-                    </label>
+                    </lablel>
                     </div>
                     <div className="radio">
                     <label>
@@ -87,6 +88,7 @@ const EventQuestion = () => {
                 <p>Input:</p>
                 <input type="text" onChange={(answer) => update_answer(answer.target.value, 'answer2')}/>
               </div>
+            <Button variant="btn btn-success" onClick={() => console.log("submitted") }>Submit Answers!</Button>
 
             </div>      
           </div>
