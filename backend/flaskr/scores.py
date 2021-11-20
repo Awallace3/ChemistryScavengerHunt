@@ -1,8 +1,11 @@
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, json, redirect, render_template, request, session, url_for, jsonify
 )
+
+import sqlite3
+
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flaskr.db import get_db
@@ -24,8 +27,8 @@ def submit_scores():
 				gScore = content["gScore"]
 
 				db.execute(
-					"INSERT INTO user (username, user2, user3, user4, curscore, totalscore) VALUES (?, ?, ?, ?, ?, ?)",
-				(namesDict["name1"], namesDict["name2"], namesDict["name3"], namesDict["name4"], gScore["curScore"], gScore["totScore"])),
+					"INSERT INTO user (username, user2, user3, user4, curscore, totalscore, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
+				(namesDict["name1"], namesDict["name2"], namesDict["name3"], namesDict["name4"], gScore["curScore"], gScore["totScore"], content["date"])),
 				db.commit()
 
 				for x in content["stations"]:
@@ -43,4 +46,31 @@ def submit_scores():
 				print("got here!")
 				error = "Someone with that name has already submitted!"
 				return (error, 500) 
-				
+
+@bp.route("/getscores", methods=['GET'])
+def get_score():
+	db = get_db()
+	error = None
+
+	if error is None:
+		try:
+			data = []
+
+			db.row_factory = sqlite3.Row
+
+			rows = db.execute(
+				'SELECT * FROM user;'
+			).fetchall()
+
+			for item in rows:
+      				data.append({k: item[k] for k in item.keys()})
+
+			# have to iterate over each row and convert it to a list.
+			print(data)
+
+			return jsonify(data)
+			
+		except db.IntegrityError:
+				print("got here!")
+				error = "Someone with that name has already submitted!"
+				return (error, 500) 
