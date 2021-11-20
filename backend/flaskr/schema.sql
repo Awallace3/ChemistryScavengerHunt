@@ -8,7 +8,8 @@ CREATE TABLE user (
   user3 TEXT,
   user4 TEXT,
   curscore INTEGER,
-  totalscore INTEGER
+  totalscore INTEGER,
+  timestamp DATE
 );
 
 CREATE TABLE stations (

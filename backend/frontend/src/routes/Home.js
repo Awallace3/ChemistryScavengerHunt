@@ -51,6 +51,13 @@ function Home() {
           <>
             <Button variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} onClick={() => begin() }>Begin!</Button>
           </>
+        
+        <div style={{margin: "3%"}}>
+          <h2> Instructions: </h2>
+          <p> Please do not enter any labs or locked rooms that may pose a safety hazard. The scavenger hunt takes place in the public areas.</p> 
+          <p> You will work in groups of up to four. Please enter your names above, press begin, and then you will be given clues to find locations that have sheets with questions on them. 
+            You will receive less points per failed attempt, but you may give up and continue after 3 attempts for no credit. </p>
+        </div>
 
     
         </div>
