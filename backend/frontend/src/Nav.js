@@ -18,6 +18,16 @@ function Nav() {
     }}>
       Home
     </button>
+    <button style={{alignSelf: "center", backgroundColor: "white", borderColor: "white"}} onClick={() =>{
+      linkPage('/Event')
+    }}>
+      Event
+    </button>
+    <button style={{alignSelf: "center", backgroundColor: "white", borderColor: "white"}} onClick={() =>{
+      linkPage('/Leaderboard')
+    }}>
+      Leaderboard
+    </button>
       <img
         src={UMiss}
         height="30"
