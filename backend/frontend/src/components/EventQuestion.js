@@ -1,15 +1,40 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
 
+
+const eval_to_user = (attempt, err) => {
+    if(attempt > 0){
+        if ( !err ) {
+            return (
+                <p style={{color: 'red'}}>Incorrect</p>
+            )
+        } else {
+            return (
+                <p style={{color: 'green'}}>Correct!</p>
+            )
+        }
+    } else {
+        return null
+    }
+}
+
 const EventQuestion = () => {
+    const [attempts, setAttempts] = useState(0)
+    const { 
+        state, update_answer, 
+        submit_answers, next_question
+    } = useContext(EventContext)
 
-
-    const { state, update_answer} = useContext(EventContext)
     const station = state.stations[state.position];
-    console.log(station)
+    
+    function submission() {
+        setAttempts(attempts+1)
+        submit_answers()
+    }
+
     if (isMobile) {
         return (
           <div className="eventQuestion-container"> 
@@ -77,6 +102,7 @@ const EventQuestion = () => {
                         E
                     </label>
                     </div>
+                    {eval_to_user(attempts, state.correct1)}
                    
                     <div>
                    
@@ -87,8 +113,22 @@ const EventQuestion = () => {
               <div style={{flexDirection: 'row'}}>
                 <p>Input:</p>
                 <input type="text" onChange={(answer) => update_answer(answer.target.value, 'answer2')}/>
+                {eval_to_user(attempts, state.correct2)}
               </div>
-            <Button variant="btn btn-success" onClick={() => console.log("submitted") }>Submit Answers!</Button>
+            
+            {attempts > 0 ? 
+                <p>attempt: {attempts}</p> : null
+            }
+            
+            <Button variant="btn btn-success" onClick={(e) => submission() }>Submit Answers!</Button>
+
+
+            {
+                state.correct1 && state.correct2 && attempts > 0 ? (
+                    <Button variant="btn btn-success" onClick={() => next_question(attempts) }>Next Question!</Button>
+                ) : (null)
+            }
+
 
             </div>      
           </div>

@@ -1,19 +1,15 @@
-import React, { useEffect, useContext } from 'react';
+// import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
-import { Button } from 'react-bootstrap';
-import { useHistory } from "react-router-dom";
-import {Context as EventContext } from '../context/EventContext';
+// import { Button } from 'react-bootstrap';
+// import { useHistory } from "react-router-dom";
+// import {Context as EventContext } from '../context/EventContext';
 import EventQuestion from '../components/EventQuestion';
 
 function Event() {
 
-  const { state} = useContext(EventContext)
-
-  useEffect(() => {
-    console.log("state", state)
-  });
-  
+  // const { state} = useContext(EventContext)
     if (isMobile) {
       return (
         <div className="background-container"> 

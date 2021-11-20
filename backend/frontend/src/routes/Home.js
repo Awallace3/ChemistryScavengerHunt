@@ -11,8 +11,8 @@ const stations = [
       "station": "S",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -21,8 +21,8 @@ const stations = [
       "station": "P",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -31,8 +31,8 @@ const stations = [
       "station": "D",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -41,8 +41,8 @@ const stations = [
       "station": "F",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -51,8 +51,8 @@ const stations = [
       "station": "G",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -61,8 +61,8 @@ const stations = [
       "station": "H",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -71,8 +71,8 @@ const stations = [
       "station": "I",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -81,8 +81,8 @@ const stations = [
       "station": "J",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -91,8 +91,8 @@ const stations = [
       "station": "K",
       "answer1": "",
       "answer2": "",
-      "c_answer1": "",
-      "c_answer2": "",
+      "c_answer1": "A",
+      "c_answer2": 11.1,
       "score": 0,
       "attempt": 0,
   },
@@ -101,8 +101,8 @@ const stations = [
     "station": "L",
     "answer1": "",
     "answer2": "",
-    "c_answer1": "",
-    "c_answer2": "",
+    "c_answer1": "A",
+    "c_answer2": 11.1,
     "score": 0,
     "attempt": 0,
 },
@@ -112,7 +112,7 @@ const stations = [
 
 function Home() {
   
-  const { state, randomize_questions } = useContext(EventContext)
+  const { randomize_questions } = useContext(EventContext)
   
   function NewLineText(bio) {
       let splitLines = bio.split(`\n`)
@@ -120,9 +120,6 @@ function Home() {
       return finalLines
   }
   const history = useHistory();
-  const handleRoute = () =>{ 
-    history.push("/about");
-  }
   const begin = () => {
     randomize_questions(stations)
     history.push('/Event')
