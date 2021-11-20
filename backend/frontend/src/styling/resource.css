@@ -1,0 +1,89 @@
+.resource-tile-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: #555251;
+}
+
+.resource-tile-container-description {
+    border-radius: 10px;
+    background-color: grey;
+}
+
+.grid-container-resources {
+  display: grid;
+  width: 80%;
+  max-width: 1100px;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resource-tile-container h1 {
+    color: white;
+}
+
+.resource-tile-download {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.resource-tile-container a {
+    background-color: grey;
+    border: 1px solid black;
+    padding: 9px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.book-tile-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: #555251;
+}
+
+.book-tile-container-description {
+    border-radius: 10px;
+    background-color: grey;
+}
+
+.grid-container-book {
+  display: grid;
+  width: 80%;
+  max-width: 1100px;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-tile-container h1 {
+    color: white;
+    font-size: 1.4vh;
+}
+
+.book-tile-download {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-tile-container a {
+    background-color: grey;
+    border: 1px solid black;
+    padding: 9px;
+    border-radius: 10px;
+    text-decoration: none;
+}

@@ -1,15 +1,28 @@
 {
-  "name": "frontend",
+  "name": "410berrypatch",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "react": "^16.8.4",
+    "react-bootstrap": "^1.4.3",
+    "react-burger-menu": "^3.0.6",
+    "react-device-detect": "^1.15.0",
+    "react-dom": "^16.8.4",
+    "react-flippy": "^0.1.5",
+    "react-helmet": "^6.1.0",
+    "react-katex": "^2.0.2",
+    "react-parallax": "^3.2.0",
+    "react-pdf": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scale-text": "^1.2.2",
+    "react-scripts": "4.0.1",
+    "styled-components": "^5.2.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,5 +47,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
