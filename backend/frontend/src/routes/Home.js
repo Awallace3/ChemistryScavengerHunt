@@ -11,7 +11,7 @@ import Beaker from '../assets/beaker.png';
 
 const stations = [
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "S",
       "answer1": "",
       "answer2": "",
@@ -22,7 +22,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "P",
       "answer1": "",
       "answer2": "",
@@ -33,7 +33,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "D",
       "answer1": "",
       "answer2": "",
@@ -44,7 +44,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "F",
       "answer1": "",
       "answer2": "",
@@ -55,7 +55,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "G",
       "answer1": "",
       "answer2": "",
@@ -66,7 +66,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "H",
       "answer1": "",
       "answer2": "",
@@ -77,7 +77,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "I",
       "answer1": "",
       "answer2": "",
@@ -88,7 +88,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "J",
       "answer1": "",
       "answer2": "",
@@ -99,7 +99,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "Clueeeee",
+      "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
       "station": "K",
       "answer1": "",
       "answer2": "",
@@ -110,7 +110,7 @@ const stations = [
       "attempt": 0,
   },
   {
-    "clue": "Clueeeee",
+    "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.",
     "station": "L",
     "answer1": "",
     "answer2": "",

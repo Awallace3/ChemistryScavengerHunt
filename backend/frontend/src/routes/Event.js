@@ -13,11 +13,11 @@ function Event() {
     if (isMobile) {
       return (
         <div className="background-container"> 
-          <h1>If you navigate away from this page, you may lose progress.</h1>
-          <div>
-            
+          { /* <h1>If you navigate away from this page, you may lose progress.</h1> */ }
+          <div className="event-score-container">
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
+
           <EventQuestion/>
         </div>
       )

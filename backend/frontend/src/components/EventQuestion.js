@@ -3,17 +3,18 @@ import '../styling/home.css'
 import {Context as EventContext } from '../context/EventContext';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
-
+import Atom from '../assets/atom.png'
+import { height } from 'dom-helpers';
 
 const eval_to_user = (attempt, err) => {
     if(attempt > 0){
         if ( !err ) {
             return (
-                <p style={{color: 'red'}}>Incorrect</p>
+                <p style={{color: '#de354c'}}> Incorrect. Try again! </p>
             )
         } else {
             return (
-                <p style={{color: 'green'}}>Correct!</p>
+                <p style={{color: 'green'}}> Correct! </p>
             )
         }
     } else {
@@ -43,18 +44,22 @@ const EventQuestion = () => {
 
     if (isMobile) {
         return (
-          <div className="eventQuestion-container"> 
+          <div className="big-event-container"> 
        
-           <div className="home-text">
-               
-              <p>Clue: {station.clue}</p>
-              <p>Station: {station.station}</p>
+           <div className="event-container">
 
-              <div style={{flexDirection: 'row'}}>
-                <p>Input:</p>
-                <form>
-                    <div className="radio">
-                    
+            <img src={Atom} style={{alignSelf: "center", width: "100px", heiht: "auto"}}/>
+
+            <div className="event-header-container">
+              <p>Station: {station.station}</p>
+              <p1>Clue: {station.clue}</p1>
+            </div> 
+
+            <div className="event-container-bottom">
+                <p>Multiple Choice Answer</p>
+                <form className={"radio-form"}>
+
+                    <label> 
                         <input
                         type="radio"
                         value="A"
@@ -62,10 +67,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         A
-                    
-                    </div>
-                    <div className="radio">
-                    
+                    </label>
+
+                    <label> 
                         <input
                         type="radio"
                         value="B"
@@ -74,9 +78,9 @@ const EventQuestion = () => {
                         />
                         B
                     
-                    </div>
-                    <div className="radio">
+                    </label> 
                     
+                    <label> 
                         <input
                         type="radio"
                         value="C"
@@ -84,10 +88,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         C
+                    </label> 
                     
-                    </div>
-                    <div className="radio">
-                    
+                    <label> 
                         <input
                         type="radio"
                         value="D"
@@ -95,10 +98,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         D
+                    </label> 
                     
-                    </div>
-                    <div className="radio">
-                    <label>
+                    <label> 
                         <input
                         type="radio"
                         value="E"
@@ -106,18 +108,17 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         E
-                    </label>
-                    </div>
+                    </label> 
+
                     {eval_to_user(attempts, state.correct1)}
                    
                     <div>
                    
                     </div>
                 </form>
-              </div>
 
               <div style={{flexDirection: 'row'}}>
-                <p>Input:</p>
+                <p>Free Response Answer:</p>
                 <input 
                     type="text" 
                     onChange={(answer) => {
@@ -132,15 +133,15 @@ const EventQuestion = () => {
               </div>
             
             {attempts > 0 ? 
-                <p>attempt: {attempts}</p> : null
+                <p>Attempts Submitted: {attempts}</p> : null
             }
             
-            <Button variant="btn btn-success" onClick={(e) => submission() }>Submit Answers!</Button>
-
+            </div>
+            <Button variant="btn btn-success" style={{marginTop: "5%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}onClick={(e) => submission() }>Submit Answers!</Button>
 
             {
                 state.correct1 && state.correct2 && attempts > 0 ? (
-                    <Button variant="btn btn-success" onClick={() => {
+                    <Button variant="btn btn-success" style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}} onClick={() => {
                         next_question(attempts) 
                         setTextInput("")
                         setAttempts(0)
