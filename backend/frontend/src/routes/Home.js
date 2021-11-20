@@ -7,7 +7,7 @@ import {Context as EventContext } from '../context/EventContext';
 
 const stations = [
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "S",
       "answer1": "",
       "answer2": "",
@@ -17,7 +17,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "P",
       "answer1": "",
       "answer2": "",
@@ -27,7 +27,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "D",
       "answer1": "",
       "answer2": "",
@@ -37,7 +37,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "F",
       "answer1": "",
       "answer2": "",
@@ -47,7 +47,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "G",
       "answer1": "",
       "answer2": "",
@@ -57,7 +57,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "H",
       "answer1": "",
       "answer2": "",
@@ -67,7 +67,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "I",
       "answer1": "",
       "answer2": "",
@@ -77,7 +77,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "J",
       "answer1": "",
       "answer2": "",
@@ -87,7 +87,7 @@ const stations = [
       "attempt": 0,
   },
   {
-      "clue": "",
+      "clue": "Clueeeee",
       "station": "K",
       "answer1": "",
       "answer2": "",
@@ -97,7 +97,7 @@ const stations = [
       "attempt": 0,
   },
   {
-    "clue": "",
+    "clue": "Clueeeee",
     "station": "L",
     "answer1": "",
     "answer2": "",

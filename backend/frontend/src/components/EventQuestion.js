@@ -14,6 +14,8 @@ const EventQuestion = () => {
           <div className="eventQuestion-container"> 
        
            <div className="home-text">
+               
+              <p>Clue: {station.clue}</p>
               <p>Station: {station.station}</p>
 
               <div style={{flexDirection: 'row'}}>
