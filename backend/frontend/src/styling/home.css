@@ -13,6 +13,26 @@
     width: 80vw;
     height: auto;
     margin-top: 12.5%;
+
+}
+
+.home-text-full {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 80vw;
+    height: auto;
+    margin-top: 2.5%;
+}
+
+.home-text-full h1 {
+    font-size: 3em;
+    color: #3c1874;
+    justify-content: center;
+    letter-spacing: 3px;
+    font-family: 'Raleway';
+    font-weight: bold;
 }
 
 .home-text h1 {
@@ -30,6 +50,19 @@
   height: auto;
   max-width: 20vw;
   margin-right: 2%;
+}
+
+.home-text-full img {
+  display: inline-block;
+  height: auto;
+  max-width: 10vw;
+  margin-right: 2%;
+}
+
+.home-text-border-box-full {
+  display: block;
+  align-content: space-between;
+  margin-bottom: 2.5%;
 }
 
 .home-text-border-box {
@@ -103,6 +136,17 @@
   align-self: center;
 }
 
+.leaderboard-container-full {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2.5%; 
+  box-shadow: 7px 3px 10px grey;
+  border-radius: 15px;
+  background-color: white;
+  width: 75vw;
+  align-self: center;
+}
+
 .score-container {
   display: block;
   font-size: 1.25rem;
@@ -113,5 +157,12 @@
   display: inline-block;
   height: auto !important;
   max-width: 50vw !important;
+  margin-right: 2%;
+}
+
+.leaderboard-img-large {
+  display: inline-block;
+  height: auto !important;
+  max-width: 15vw !important;
   margin-right: 2%;
 }

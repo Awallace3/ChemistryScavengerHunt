@@ -31,10 +31,23 @@ function Leaderboard() {
       )
     } else {
       return ( 
-        <div className="background-container">
-            <h1> SMACS 2021 </h1> 
-            <h1> Scavenger Hunt </h1>
+       <div className="background-container">    
+         <div className="home-text-full">
+            <div className="home-text-border-box-full" >
+              <img className="leaderboard-img-large" src={Trophy} alt="beaker" />
+            </div>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Final Results! </h1>
+
+            <div className="leaderboard-container-full">
+              <div>
+                <p className="score-container">{state.names.name1} <br /> {state.names.name2} <br /> {state.names.name3} <br /> {state.names.name4} </p>
+              </div>
+              <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
+            </div>
+
+          </div>
         </div>
+
       )
     }
 }

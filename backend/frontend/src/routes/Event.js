@@ -23,7 +23,7 @@ function Event() {
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
 
-<EventQuestion/>
+          <EventQuestion/>
 
           {
             state.complete ? <>
@@ -31,14 +31,40 @@ function Event() {
           </>
           : null
         }
+
+        <div>
+                <a href="mailto:amwalla3@go.olemiss.edu">
+                    <p>Issues? Email: amwalla3@go.olemiss.edu</p>
+                </a>
+
+        </div>
+
         </div>
       )
 
     } else {
       return ( 
-        <div className="background-container">
-          <h1>If you navigate away from this page, you may lose progress.</h1>
+        <div className="background-container"> 
+          <div className="event-score-container">
+            <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
+          </div>
+
           <EventQuestion/>
+
+          {
+            state.complete ? <>
+            <Button variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} onClick={() =>  final_submit_results(state) }>Submit Final Results!</Button>
+          </>
+          : null
+        }
+
+        <div>
+                <a href="mailto:amwalla3@go.olemiss.edu">
+                    <p>Issues? Email: amwalla3@go.olemiss.edu</p>
+                </a>
+        </div>
+
+
         </div>
       )
     }

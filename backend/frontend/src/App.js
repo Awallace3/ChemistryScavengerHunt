@@ -21,7 +21,6 @@ function App() {
       <Route path="/Event" exact component={Event} />
       <Route path="/Leaderboard" exact component={Leaderboard} />
     </Switch>
-    <Footer/>
      </div>
    </Router> 
     
