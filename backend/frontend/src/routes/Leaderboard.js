@@ -1,14 +1,27 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
 import {Context as EventContext } from '../context/EventContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Beaker from '../assets/beaker.png';
 import Trophy from '../assets/trophy.png'
 
 function Leaderboard() {
 
-  const { state} = useContext(EventContext)
+  const { state, get_leaderboard} = useContext(EventContext)
+
+  useEffect(() => {
+    get_leaderboard()
+    console.log(state.leaderboard)
+  }, [])
+
+  const listLeaderboard = () => state.leaderboard.map((group) => (
+    <div className="leaderboard-container" key={group.id}>
+              <div >
+              <p className="score-container">{group.username} <br /> {group.user2} <br /> {group.user3} <br /> {group.user4} </p>
+              </div>
+              <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
+    </div>
+    ))
   
   if (isMobile) {
     return (
@@ -25,6 +38,10 @@ function Leaderboard() {
               </div>
               <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
             </div>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Leaderboard </h1>
+            {state.leaderboard.length > 0 ? listLeaderboard(): null}
+
+
 
           </div>
         </div>

@@ -11,6 +11,8 @@ function shuffle(array) {
     }
     return array;
 }
+//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+
 
 function eval_math(answer2, c_answer2, percent_error) {
     var a = parseFloat(answer2)
@@ -23,6 +25,14 @@ function eval_math(answer2, c_answer2, percent_error) {
         return false
     }
 }
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+// https://stackoverflow.com/questions/8837454/sort-array-of-objects-by-single-key-with-date-value/8837511
 
 const eventReducer = (state, action) => {
     switch (action.type) {
@@ -106,6 +116,9 @@ const eventReducer = (state, action) => {
             return {...state, names: u_names}
         case 'final_submit_results':
             return {...state, final_submit_results: action.payload}
+        case 'get_leaderboard':
+            return {...state, leaderboard: action.payload}
+            //return {...state};
         default:
             return state;
     }
@@ -143,6 +156,7 @@ const final_submit_results = (dispatch) => async (state) => {
             names: state.names,
             stations: state.stations
         }
+        console.log("final_results\n", final_results)
         const response = await instance.post('/scores/submitscores', final_results);
         console.log(response)
         dispatch({ type: 'final_submit_results', payload: 'Success!' })
@@ -156,6 +170,24 @@ const final_submit_results = (dispatch) => async (state) => {
     } 
 };
 
+const get_leaderboard = (dispatch) => async () => {
+    try {
+        const response = await instance.get('/scores/getscores');
+        console.log(response)
+        var data = response.data 
+        data = sortByKey(data, 'curscore')
+        dispatch({ type: 'get_leaderboard', payload: data })
+    } catch (err) {
+        console.log("Error:")
+        console.log(err)
+        dispatch({
+            type: 'get_leaderboard',
+            payload: 'Error with submission. Try again.'
+        })
+    } 
+    
+}
+
 
 export const { Provider, Context } = createDataContext(
     eventReducer,
@@ -163,7 +195,7 @@ export const { Provider, Context } = createDataContext(
         randomize_questions, update_answer,
         submit_answers, next_question,
         count_total_score, update_names,
-        final_submit_results
+        final_submit_results, get_leaderboard
     },
     { 
         position: 0,
@@ -191,32 +223,34 @@ export const { Provider, Context } = createDataContext(
             "name3": "c",
             "name4": "d",
         },
-        // stations: shuffle([
-        //     {
-        //         "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-        //         "station": "S",
-        //         "answer1": "",
-        //         "answer2": "",
-        //         "c_answer1": "A",
-        //         "c_answer2": 11.1,
-        //         "score1": 0,
-        //         "score2": 0,
-        //         "attempt": 0,
-        //         "percent_error": 0.00
-        //     },
-        //     {
-        //         "clue": "Clueeeee",
-        //         "station": "P",
-        //         "answer1": "",
-        //         "answer2": "",
-        //         "c_answer1": "A",
-        //         "c_answer2": 11.1,
-        //         "score1": 0,
-        //         "score2": 0,
-        //         "attempt": 0,
-        //         "percent_error": 0.05
-        //     }
-        //   ]),
+        leaderboard: [],
+        stations: shuffle([
+            {
+                "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
+                "station": "S",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "C",
+                "c_answer2": 2.2,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            },
+            {
+                "clue": "Where could you perform an overnight reaction at cold temperature? You might run into Dr. Wadkins or Dr. Pedigo on your way to this location!",
+                "station": "P",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "B",
+                "c_answer2": 299,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            }
+        ]),
+        /*
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -315,6 +349,7 @@ export const { Provider, Context } = createDataContext(
                 "percent_error": 0.00
             },
           ])
+          */
           //
     }
 ) 
