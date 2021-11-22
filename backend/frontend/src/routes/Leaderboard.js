@@ -4,6 +4,7 @@ import { isMobile } from 'react-device-detect';
 import {Context as EventContext } from '../context/EventContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Beaker from '../assets/beaker.png';
+import Trophy from '../assets/trophy.png'
 
 function Leaderboard() {
 
@@ -14,15 +15,15 @@ function Leaderboard() {
         <div className="background-container">    
          <div className="home-text">
             <div className="home-text-border-box" >
-              <img src={Beaker} alt="beaker" />
-              <img src={Beaker} alt="beaker" />
-              <img src={Beaker} alt="beaker" />
+              <img className="leaderboard-img" src={Trophy} alt="beaker" />
             </div>
             <h1 style={{fontSize: "2rem", margin: "0"}}> Final Results! </h1>
 
-            <div style={{flexDirection: 'row'}}>
-              <p>{state.names.name1}, {state.names.name2}, {state.names.name3}, {state.names.name4} </p>
-              <p>Fianl Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
+            <div className="leaderboard-container">
+              <div>
+                <p className="score-container">{state.names.name1} <br /> {state.names.name2} <br /> {state.names.name3} <br /> {state.names.name4} </p>
+              </div>
+              <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
             </div>
 
           </div>

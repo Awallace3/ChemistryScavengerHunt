@@ -91,3 +91,27 @@
        url('../fonts/raleway-v19-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
        url('../fonts/raleway-v19-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
+.leaderboard-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5%; 
+  box-shadow: 7px 3px 10px grey;
+  border-radius: 15px;
+  background-color: white;
+  width: 90vw;
+  align-self: center;
+}
+
+.score-container {
+  display: block;
+  font-size: 1.25rem;
+  padding: 10px;
+}
+
+.leaderboard-img {
+  display: inline-block;
+  height: auto !important;
+  max-width: 50vw !important;
+  margin-right: 2%;
+}
