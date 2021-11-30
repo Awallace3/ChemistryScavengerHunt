@@ -26,3 +26,11 @@ CREATE TABLE stations (
   percentError REAL,
   FOREIGN KEY (username) REFERENCES user (username)
 );
+
+CREATE TABLE survey (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  q1 INTEGER,
+  q2 INTEGER,
+  improvements TEXT
+);
