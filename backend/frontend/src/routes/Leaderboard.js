@@ -61,6 +61,8 @@ function Leaderboard() {
               </div>
               <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
             </div>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Leaderboard </h1>
+            {state.leaderboard.length > 0 ? listLeaderboard(): null}
 
           </div>
         </div>

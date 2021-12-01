@@ -117,7 +117,11 @@ const eventReducer = (state, action) => {
         case 'final_submit_results':
             return {...state, final_submit_results: action.payload}
         case 'get_leaderboard':
-            return {...state, leaderboard: action.payload}
+            if (action.payload) {
+                return {...state, leaderboard: action.payload}
+            } else {
+                return {...state}
+            }
             //return {...state};
         default:
             return state;
@@ -181,8 +185,7 @@ const get_leaderboard = (dispatch) => async () => {
         console.log("Error:")
         console.log(err)
         dispatch({
-            type: 'get_leaderboard',
-            payload: 'Error with submission. Try again.'
+            type: 'get_leaderboard'
         })
     } 
     
@@ -213,17 +216,25 @@ export const { Provider, Context } = createDataContext(
         // date: "YYYY-MM-DD",
         // date: "2021-12-03",
         date: "2021-12-02",
+        leaderboard: [],
         gScore: {
             curScore: 0, 
             totScore: 150
         },
+        names: {
+            "name1": "",
+            "name2": "",
+            "name3": "",
+            "name4": "",
+        },
+
+        /*
         names: {
             "name1": "a",
             "name2": "b",
             "name3": "c",
             "name4": "d",
         },
-        leaderboard: [],
         stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -250,7 +261,7 @@ export const { Provider, Context } = createDataContext(
                 "percent_error": 0.02
             }
         ]),
-        /*
+          */
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -348,8 +359,31 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
                 "percent_error": 0.00
             },
+            {
+                "clue": "If you wanted to have an invigorating conversation about metal catalysts directly followed by a discussion about the environmental impact of microplastics in the ocean, where might you go to find experts on these subjects?",
+                "station": "L",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "A",
+                "c_answer2": 7.21,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            },
+            {
+                "clue": "If you wanted to become a chemist but trade in your lab coat for a computer, where might you go to find a research advisor? Hint: you might have tried to enter here before, but the doors are always locked!",
+                "station": "K",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "C",
+                "c_answer2": 32321,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.00
+            },
           ])
-          */
           //
     }
 ) 
