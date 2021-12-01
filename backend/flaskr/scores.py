@@ -9,7 +9,7 @@ import sqlite3
 from flaskr.db import get_db
 from flask_cors import CORS # comment on deployment
 
-bp = Blueprint('api', __name__, url_prefix='api')
+bp = Blueprint('/api', __name__, url_prefix='/api')
 
 @bp.route("/submitscores", methods=['POST'])
 def submit_scores():
