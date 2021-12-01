@@ -30,7 +30,7 @@ function Leaderboard() {
             <div className="home-text-border-box" >
               <img className="leaderboard-img" src={Trophy} alt="beaker" />
             </div>
-            <h1 style={{fontSize: "2rem", margin: "0"}}> Final Results! </h1>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Your Final Score: </h1>
 
             <div className="leaderboard-container">
               <div>
@@ -38,7 +38,7 @@ function Leaderboard() {
               </div>
               <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
             </div>
-            <h1 style={{fontSize: "2rem", margin: "0"}}> Leaderboard </h1>
+            <h1 style={{fontSize: "2rem", marginTop: "5%"}}> Leaderboard </h1>
             {state.leaderboard.length > 0 ? listLeaderboard(): null}
 
 
@@ -53,7 +53,7 @@ function Leaderboard() {
             <div className="home-text-border-box-full" >
               <img className="leaderboard-img-large" src={Trophy} alt="beaker" />
             </div>
-            <h1 style={{fontSize: "2rem", margin: "0"}}> Final Results! </h1>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Your Final Score: </h1>
 
             <div className="leaderboard-container-full">
               <div>
@@ -61,7 +61,7 @@ function Leaderboard() {
               </div>
               <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
             </div>
-            <h1 style={{fontSize: "2rem", margin: "0"}}> Leaderboard </h1>
+            <h1 style={{fontSize: "2rem", marginTop: "5%"}}> Leaderboard </h1>
             {state.leaderboard.length > 0 ? listLeaderboard(): null}
 
           </div>
