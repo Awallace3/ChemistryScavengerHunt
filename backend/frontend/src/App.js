@@ -3,6 +3,7 @@ import Nav from './Nav';
 import Home from './routes/Home';
 import Event from './routes/Event';
 import Leaderboard from './routes/Leaderboard'
+import Survey from './routes/Survey';
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './Footer';
 import {Helmet} from "react-helmet";
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" exact component={Home} />
       <Route path="/Event" exact component={Event} />
       <Route path="/Leaderboard" exact component={Leaderboard} />
+      <Route path="/Survey" exact component={Survey} />
     </Switch>
      </div>
    </Router> 

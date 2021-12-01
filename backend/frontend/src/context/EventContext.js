@@ -104,7 +104,7 @@ const eventReducer = (state, action) => {
         case 'count_total_score':
             var u_gScore = state.gScore
             u_gScore.curScore = 0
-            for (var i=0; i<state.stations.length-1; i++ ){
+            for (var i=0; i<state.stations.length; i++ ){
                 u_gScore.curScore += state.stations[i].score1
                 u_gScore.curScore += state.stations[i].score2
             }
@@ -115,7 +115,7 @@ const eventReducer = (state, action) => {
             u_names[action.payload.name_num] = action.payload.u_name
             return {...state, names: u_names}
         case 'final_submit_results':
-            return {...state, final_submit_results: action.payload}
+            return {...state, api_status: action.payload}
         case 'get_leaderboard':
             if (action.payload) {
                 return {...state, leaderboard: action.payload}
@@ -163,13 +163,13 @@ const final_submit_results = (dispatch) => async (state) => {
         console.log("final_results\n", final_results)
         const response = await instance.post('/api/submitscores', final_results);
         console.log(response)
-        dispatch({ type: 'final_submit_results', payload: 'Success!' })
+        dispatch({ type: 'final_submit_results', payload: 1 })
     } catch (err) {
         console.log("Error:")
         console.log(err)
         dispatch({
             type: 'final_submit_results',
-            payload: 'Error with submission. Try again.'
+            payload: 2
         })
     } 
 };
@@ -187,8 +187,11 @@ const get_leaderboard = (dispatch) => async () => {
         dispatch({
             type: 'get_leaderboard'
         })
-    } 
-    
+    }    
+}
+
+const survey_name = (dispatch) => (name) => {
+    dispatch({ type: 'survey_name', payload: name })
 }
 
 
@@ -204,6 +207,7 @@ export const { Provider, Context } = createDataContext(
         position: 0,
         correct1: false, correct2: false,
         complete: false, 
+        api_status: 0,
         final_results_submit: '',
         /*
         names: {
@@ -235,33 +239,8 @@ export const { Provider, Context } = createDataContext(
             "name3": "c",
             "name4": "d",
         },
-        stations: shuffle([
-            {
-                "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
-                "station": "S",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "C",
-                "c_answer2": 2.2,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-                "percent_error": 0.02
-            },
-            {
-                "clue": "Where could you perform an overnight reaction at cold temperature? You might run into Dr. Wadkins or Dr. Pedigo on your way to this location!",
-                "station": "P",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "B",
-                "c_answer2": 299,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-                "percent_error": 0.02
-            }
-        ]),
           */
+         /*
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -383,7 +362,46 @@ export const { Provider, Context } = createDataContext(
                 "attempt": 0,
                 "percent_error": 0.00
             },
-          ])
+          ]),
+          */
+          stations: shuffle([
+            {
+                "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
+                "station": "S",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "C",
+                "c_answer2": 2.2,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            },
+            {
+                "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
+                "station": "L",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "C",
+                "c_answer2": 2.2,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            },
+            {
+                "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
+                "station": "T",
+                "answer1": "",
+                "answer2": "",
+                "c_answer1": "C",
+                "c_answer2": 2.2,
+                "score1": 0,
+                "score2": 0,
+                "attempt": 0,
+                "percent_error": 0.02
+            },
+        ])
           //
     }
 ) 

@@ -32,6 +32,11 @@ function Nav() {
     }}>
       Leaderboard
     </Button>
+    <Button variant="secondary" size="sm" style={{alignSelf: "center", borderColor: "#f3f3f3", backgroundColor: "#3c1874"}} onClick={() =>{
+      linkPage('/Survey')
+    }}>
+      Survey
+    </Button>
       <img
         src={UMiss}
         height="30"
@@ -62,6 +67,12 @@ function Nav() {
     }}>
       Leaderboard
     </Button>
+    <Button variant="secondary" style={{alignSelf: "center", borderColor: "#f3f3f3", backgroundColor: "#3c1874"}} onClick={() =>{
+      linkPage('/Survey')
+    }}>
+      Survey
+    </Button>
+      
       <img
         src={UMiss}
         height="30"
