@@ -11,6 +11,8 @@ const eventReducer = (state, action) => {
             return {...state, qs: u_qs }
         case "u_improvements":
             return {...state, improvements: action.payload}
+        case "submit_survey":
+            return {...state, api_status: action.payload}
         default:
             return state;
     }
@@ -39,9 +41,10 @@ const submit_survey = (dispatch) => async (state) => {
         console.log(response)
         dispatch({ type: "submit_survey", payload: 1})
     } catch (err) {
+        console.log('error survey')
         console.log(err)
+        dispatch({ type: 'submit_survey', payload: 2})
     }
-    dispatch({ type: 'submit_survey', payload: 2})
 }
 
 export const { Provider, Context } = createDataContext(
@@ -53,6 +56,7 @@ export const { Provider, Context } = createDataContext(
         submit_survey
     },
     { 
+        api_status: 0,
         name: "",
         qs: {
             q1: 1,

@@ -240,7 +240,7 @@ export const { Provider, Context } = createDataContext(
             "name4": "d",
         },
           */
-         /*
+         
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -363,7 +363,8 @@ export const { Provider, Context } = createDataContext(
                 "percent_error": 0.00
             },
           ]),
-          */
+          
+         /*
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? ",
@@ -402,122 +403,8 @@ export const { Provider, Context } = createDataContext(
                 "percent_error": 0.02
             },
         ])
+        */
           //
     }
 ) 
 
-
-/*
- stations: shuffle([
-            {
-                "clue": "Clueeeee",
-                "station": "S",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "P",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "D",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "F",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "G",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "H",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "I",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "J",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-                "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-                "station": "K",
-                "answer1": "",
-                "answer2": "",
-                "c_answer1": "A",
-                "c_answer2": 11.1,
-                "score1": 0,
-                "score2": 0,
-                "attempt": 0,
-            },
-            {
-              "clue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare magna a risus mollis, a feugiat ligula pretium. Sed ligula augue, tincidunt pulvinar gravida in, malesuada nec tellus.eee",
-              "station": "L",
-              "answer1": "",
-              "answer2": "",
-              "c_answer1": "A",
-              "c_answer2": 11.1,
-              "score1": 0,
-              "score2": 0,
-              "attempt": 0,
-          },
-          ])
-*/

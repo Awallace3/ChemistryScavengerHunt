@@ -1,4 +1,4 @@
-import React, {useContext, useState } from 'react';
+import React, {useContext, useState, useEffect } from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
 import {Context as SurveyContext } from '../context/SurveyContext'
@@ -14,7 +14,17 @@ function Survey() {
     } = useContext(SurveyContext)
     const [textInput, setTextInput] = useState('')
     const [name, setName] = useState('')
-  
+    const [isDisabled, setIsDisabled] = useState(false)
+    const handleSubmitClicked = () => {
+        setIsDisabled(true)
+    }
+    console.log("state status", state.api_status)
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsDisabled(false)
+        }, 5000)
+        return () => clearTimeout(timer)
+    }, [isDisabled])
   if (isMobile) {
     return (
         <div className="background-container">    
@@ -190,11 +200,17 @@ function Survey() {
                     value={textInput}
                     
                     />
+                    {
+                        state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null
+                    }
+             
                 <Button 
               variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
               onClick={() =>  {
                 submit_survey(state)
+                handleSubmitClicked()
               }}
+              disabled={isDisabled}
                 
             >Submit Survey</Button>
           </div>

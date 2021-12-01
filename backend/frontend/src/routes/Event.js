@@ -9,17 +9,23 @@ import EventQuestion from '../components/EventQuestion';
 function Event() {
     const { state, final_submit_results }  = useContext(EventContext)
     // const history = useHistory();
-    const [disable, setDisable] = useState(false)
-  console.log(state.api_status)
-  console.log(state)
+   
+    const [isDisabled, setIsDisabled] = useState(false)
+    const handleSubmitClicked = () => {
+        setIsDisabled(true)
+    }
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsDisabled(false)
+        }, 5000)
+        return () => clearTimeout(timer)
+    }, [isDisabled])
+
+
     useEffect(() => {
       if ( state.complete ) {
         // history.push('/Leaderboard')
         console.log('completed')
-      }
-      if (state.api_status == 2 && disable==true ) {
-        console.log("triggered")
-        setDisable(false)
       }
     }, [state.complete, state.api_status])
 
@@ -32,15 +38,18 @@ function Event() {
 
           <EventQuestion/>
 
+            {
+              state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null
+            }
           {
             state.complete ? <>
             <Button 
               variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
               onClick={() =>  {
                 final_submit_results(state)
-                //setDisable(true)
+                handleSubmitClicked()
               }}
-                disabled={disable}
+              disabled={isDisabled} 
             >Submit Final Results!</Button>
           </>
           : null
@@ -66,15 +75,18 @@ function Event() {
           <EventQuestion/>
 
           {
+              state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null
+            }
+          {
             state.complete ? <>
             <Button 
               variant="primary" size="lg" 
               style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
               onClick={() =>  {
                 final_submit_results(state)
-                //setDisable(true)
+                handleSubmitClicked()
               }}
-              disabled={disable}
+              disabled={isDisabled}
               >Submit Final Results!</Button>
           </>
           : null
