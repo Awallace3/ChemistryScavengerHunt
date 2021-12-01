@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Navbar, Container} from 'react-bootstrap'
-import UMiss from './assets/acknowledgements/umiss.png'
+import UMiss from './assets/umiss.png'
 import { useHistory } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 import { isMobile } from 'react-device-detect';

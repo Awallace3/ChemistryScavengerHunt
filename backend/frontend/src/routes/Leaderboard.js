@@ -53,7 +53,7 @@ function Leaderboard() {
             <div className="home-text-border-box-full" >
               <img className="leaderboard-img-large" src={Trophy} alt="beaker" />
             </div>
-            <h1 style={{fontSize: "2rem", margin: "0"}}> Final Results! </h1>
+            <h1 style={{fontSize: "2rem", margin: "0"}}> Your Final Score: </h1>
 
             <div className="leaderboard-container-full">
               <div>

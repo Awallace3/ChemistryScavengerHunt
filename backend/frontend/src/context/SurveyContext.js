@@ -28,8 +28,20 @@ const u_improvements = (dispatch) => (name) => {
     dispatch({ type: 'u_improvements', payload: name })
 }
 
-const submit_survey = (dispatch) => (state) => {
-    dispatch({ type: 'submit_survey'})
+const submit_survey = (dispatch) => async (state) => {
+    try {
+        const final_results = {
+            name: state.name ,
+            qs: state.qs,
+            improvements: state.improvements
+        }
+        const response = await instance.post('/api/submitsurvey', final_results);
+        console.log(response)
+        dispatch({ type: "submit_survey", payload: 1})
+    } catch (err) {
+        console.log(err)
+    }
+    dispatch({ type: 'submit_survey', payload: 2})
 }
 
 export const { Provider, Context } = createDataContext(
