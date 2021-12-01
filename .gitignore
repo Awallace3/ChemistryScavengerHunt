@@ -39,5 +39,6 @@ packages/react-devtools-timeline/dist
 *.eslintcache
 backend/frontend/package-lock.json
 .venv
+backend/frontend/.eslintcache
 .package-lock
 flaskr.sqlite

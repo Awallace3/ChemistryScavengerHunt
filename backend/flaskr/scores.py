@@ -9,7 +9,7 @@ import sqlite3
 from flaskr.db import get_db
 from flask_cors import CORS # comment on deployment
 
-bp = Blueprint('scores', __name__, url_prefix='/scores')
+bp = Blueprint('api', __name__, url_prefix='api')
 
 @bp.route("/submitscores", methods=['POST'])
 def submit_scores():
@@ -74,8 +74,7 @@ def get_score():
 				error = "Someone with that name has already submitted!"
 				return (error, 500) 
 
-bpsurvey = Blueprint('survey', __name__, url_prefix='/survey')
-@bpsurvey.route("/submit", methods=['POST'])
+@bp.route("/submitsurvey", methods=['POST'])
 def submit():
 	if request.method == 'POST':
 		content = dict(request.json)

@@ -161,7 +161,7 @@ const final_submit_results = (dispatch) => async (state) => {
             stations: state.stations
         }
         console.log("final_results\n", final_results)
-        const response = await instance.post('/scores/submitscores', final_results);
+        const response = await instance.post('/api/submitscores', final_results);
         console.log(response)
         dispatch({ type: 'final_submit_results', payload: 'Success!' })
     } catch (err) {
@@ -176,7 +176,7 @@ const final_submit_results = (dispatch) => async (state) => {
 
 const get_leaderboard = (dispatch) => async () => {
     try {
-        const response = await instance.get('/scores/getscores');
+        const response = await instance.get('/api/getscores');
         console.log(response)
         var data = response.data 
         data = sortByKey(data, 'curscore')
