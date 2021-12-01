@@ -8,7 +8,7 @@ def create_app(test_config=None):
 	# app = Flask(__name__, static_folder='frontend/build', static_url_path='/')
 	CORS(app) # comment on deployment
 	app.config.from_mapping(
-        	SECRET_KEY='dev',
+        	SECRET_KEY='83082d56dcce4ab9f4d8c1a6952718f6df880a010a9740c0d5c747598b57230d',
         	DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     	)
 
