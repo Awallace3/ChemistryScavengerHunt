@@ -13,77 +13,28 @@ function Survey() {
         submit_survey
     } = useContext(SurveyContext)
     const [textInput, setTextInput] = useState('')
-  console.log(state)
-  
-  const mc = (func, q) => {
-    return (
-      <form className={"radio-form"}>
-        <label> 
-            <input
-            type="radio"
-            value={1}
-            checked={state.qs[q] === 1}
-            onChange={(answer) => func(answer.target.value, q)}
-            />
-            1
-        </label>
-
-        <label> 
-            <input
-            type="radio"
-            value={2}
-            checked={state.qs[q] === 2}
-            onChange={(answer) => func(answer.target.value, q)}
-            />
-            2
-        
-        </label> 
-        
-        <label> 
-            <input
-            type="radio"
-            value={3}
-            checked={state.qs[q] === 3}
-            onChange={(answer) => func(answer.target.value, q)}
-            />
-            3
-        </label> 
-        
-        <label> 
-            <input
-            type="radio"
-            value={4}
-            checked={state.qs[q] === 4}
-            onChange={(answer) => func(answer.target.value, q)}
-            />
-            4
-        </label> 
-        
-        <label> 
-            <input
-            type="radio"
-            value={5}
-            checked={state.qs[q] === 5}
-            onChange={(answer) => func(answer.target.value, q)}
-            />
-            5
-        </label> 
-
-        <div>
-        
-        </div>
-    </form> 
-    )
-  }
+    const [name, setName] = useState('')
   
   if (isMobile) {
     return (
         <div className="background-container">    
          <div className="home-text">
             <h1 style={{fontSize: "2rem", margin: "0"}}> Survey </h1>
+            <p > Please enter first and last name</p>
+            <input 
+                    type="text" 
+                    onChange={(answer) => {
+                        u_name(answer.target.value)
+                        setName(answer.target.value)
+                    }
+                    }
+                    value={name}
+                    
+                    />
             <p > Did you enjoy this scavenger hunt?</p>
                <form className={"radio-form"}>
                    
+               
                     <input
                     type="radio"
                     value={1}
