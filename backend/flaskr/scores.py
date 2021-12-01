@@ -84,9 +84,11 @@ def submit():
 
 		if error is None:
 			try:
+				questions = content["questions"]
+
 				db.execute(
-					"INSERT INTO survey (name, q1, q2, improvements) VALUES (?, ?, ?, ?)",
-					(content["name"], content["q1"], content["q2"], content["improvements"]))
+					"INSERT INTO survey (name, q1, q2, q3, improvements) VALUES (?, ?, ?, ?, ?)",
+					(content["name"], questions["q1"], questions["q2"], questions["q3"], content["improvements"]))
 				db.commit()
 
 				return ("", 200)

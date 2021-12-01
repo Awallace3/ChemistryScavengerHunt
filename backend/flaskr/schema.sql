@@ -32,5 +32,6 @@ CREATE TABLE survey (
   name TEXT,
   q1 INTEGER,
   q2 INTEGER,
+  q3 INTEGER,
   improvements TEXT
 );
