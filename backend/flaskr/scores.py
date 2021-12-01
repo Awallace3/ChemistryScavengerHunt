@@ -6,12 +6,10 @@ from flask import (
 
 import sqlite3
 
-from werkzeug.security import check_password_hash, generate_password_hash
-
 from flaskr.db import get_db
 from flask_cors import CORS # comment on deployment
 
-bp = Blueprint('scores', __name__, url_prefix='/scores')
+bp = Blueprint('api', __name__, url_prefix='api')
 
 @bp.route("/submitscores", methods=['POST'])
 def submit_scores():
@@ -73,5 +71,26 @@ def get_score():
 			
 		except db.IntegrityError:
 				print("got here!")
+				error = "Someone with that name has already submitted!"
+				return (error, 500) 
+
+@bp.route("/submitsurvey", methods=['POST'])
+def submit():
+	if request.method == 'POST':
+		content = dict(request.json)
+
+		db = get_db()
+		error = None
+
+		if error is None:
+			try:
+				db.execute(
+					"INSERT INTO survey (name, q1, q2, improvements) VALUES (?, ?, ?, ?)",
+					(content["name"], content["q1"], content["q2"], content["improvements"]))
+				db.commit()
+
+				return ("", 200)
+
+			except db.IntegrityError:
 				error = "Someone with that name has already submitted!"
 				return (error, 500) 

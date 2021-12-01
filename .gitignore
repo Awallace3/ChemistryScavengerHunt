@@ -39,3 +39,4 @@ packages/react-devtools-timeline/dist
 *.eslintcache
 backend/frontend/.eslintcache
 .package-lock
+flaskr.sqlite
