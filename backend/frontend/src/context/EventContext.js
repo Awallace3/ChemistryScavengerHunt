@@ -117,7 +117,11 @@ const eventReducer = (state, action) => {
         case 'final_submit_results':
             return {...state, final_submit_results: action.payload}
         case 'get_leaderboard':
-            return {...state, leaderboard: action.payload}
+            if (action.payload) {
+                return {...state, leaderboard: action.payload}
+            } else {
+                return {...state}
+            }
             //return {...state};
         default:
             return state;
@@ -181,8 +185,7 @@ const get_leaderboard = (dispatch) => async () => {
         console.log("Error:")
         console.log(err)
         dispatch({
-            type: 'get_leaderboard',
-            payload: 'Error with submission. Try again.'
+            type: 'get_leaderboard'
         })
     } 
     
