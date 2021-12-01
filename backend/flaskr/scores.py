@@ -84,7 +84,7 @@ def submit():
 
 		if error is None:
 			try:
-				questions = content["questions"]
+				questions = content["qs"]
 
 				db.execute(
 					"INSERT INTO survey (name, q1, q2, q3, improvements) VALUES (?, ?, ?, ?, ?)",
