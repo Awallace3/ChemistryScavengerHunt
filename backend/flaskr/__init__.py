@@ -34,5 +34,6 @@ def create_app(test_config=None):
 
 	from . import scores
 	app.register_blueprint(scores.bp)
+	app.register_blueprint(scores.bpsurvey)
 
 	return app
