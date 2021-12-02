@@ -30,6 +30,10 @@ function Survey() {
         <div className="background-container">    
          <div className="survey-container">
             <h1 style={{fontSize: "2rem", marginTop: "1%"}}> Survey </h1>
+            <p> 1 = Strongly Disagree <br/>
+                
+                5 = Strongly Agree
+            </p>
             <p > Please enter first and last name: </p>
             <input 
                     type="text" style={{width: "80vw", alignSelf: "center"}}
@@ -43,7 +47,7 @@ function Survey() {
                     />
             <p > Did you enjoy this scavenger hunt?</p>
                <form className={"radio-form"}>
-                    <p> Strongly Disagree </p>
+                    
                     
                     <input
                     type="radio"
@@ -405,8 +409,11 @@ function Survey() {
                 <Button 
               variant="primary" size="lg" style={{width: "40vw", alignSelf: "center", marginBottom: "2%", marginTop: "2%", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
               onClick={() =>  {
+                
                 submit_survey(state)
+                handleSubmitClicked()
               }}
+              disabled={isDisabled}
                 
             >Submit Survey</Button>
           </div>
