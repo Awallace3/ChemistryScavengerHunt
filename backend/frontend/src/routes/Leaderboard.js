@@ -19,7 +19,7 @@ function Leaderboard() {
               <div >
               <p className="score-container">{group.username} <br /> {group.user2} <br /> {group.user3} <br /> {group.user4} </p>
               </div>
-              <p className="score-container">Final Score: <br /> {state.gScore.curScore} / {state.gScore.totScore}</p>
+              <p className="score-container">Final Score: <br /> {group.curscore} / {group.totalscore}</p>
     </div>
     ))
   

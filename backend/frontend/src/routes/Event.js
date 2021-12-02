@@ -2,13 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import '../styling/home.css'
 import { isMobile } from 'react-device-detect';
 import { Button } from 'react-bootstrap';
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {Context as EventContext } from '../context/EventContext';
 import EventQuestion from '../components/EventQuestion';
 
 function Event() {
     const { state, final_submit_results }  = useContext(EventContext)
-    // const history = useHistory();
+    const history = useHistory();
    
     const [isDisabled, setIsDisabled] = useState(false)
     const handleSubmitClicked = () => {
@@ -21,11 +21,10 @@ function Event() {
         return () => clearTimeout(timer)
     }, [isDisabled])
 
-
     useEffect(() => {
-      if ( state.complete ) {
-        // history.push('/Leaderboard')
+      if ( state.api_status == 1 ) {
         console.log('completed')
+        history.push('/Leaderboard')
       }
     }, [state.complete, state.api_status])
 
