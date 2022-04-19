@@ -200,3 +200,18 @@
   margin-top: 2%;
   font-size: 1.25rem;
 }
+
+.instructions-container {
+  width: 50%;
+  align-self: center;
+}
+
+.instructions-container h2 {
+  font-weight: bold;
+  font-family: 'Raleway';
+}
+
+.instructions-container p {
+  font-family: 'Raleway';
+  font-size: 1.25rem;
+}

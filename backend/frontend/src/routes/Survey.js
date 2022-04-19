@@ -30,9 +30,9 @@ function Survey() {
         <div className="background-container">    
          <div className="survey-container">
             <h1 style={{fontSize: "2rem", marginTop: "1%"}}> Survey </h1>
-            <p> 1 = Strongly Disagree <br/>
+            <p> 1 = Strongly Disagree / Very Difficult <br/>
                 
-                5 = Strongly Agree
+                5 = Strongly Agree / Too Easy
             </p>
             <p > Please enter first and last name: </p>
             <input 
@@ -96,7 +96,7 @@ function Survey() {
                     </div>
                 </form>
 
-                <p > Do you feel more comfortable in the chemistry building after this experience?</p>
+                <p> Did you prefer this scavenger hunt over a traditional review?</p>
                <form className={"radio-form"}>
                     
                         <input
@@ -228,9 +228,9 @@ function Survey() {
   <div className="background-container">    
          <div className="survey-container-full">
             <h1 style={{fontSize: "2rem", marginTop: "1%"}}> Survey </h1>
-            <p> 1 = Strongly Disagree <br/>
+            <p> 1 = Strongly Disagree / Very Difficult <br/>
                 
-                5 = Strongly Agree
+                5 = Strongly Agree / Too Easy
             </p>
             <p > Please enter first and last name: </p>
             <input 

@@ -20,8 +20,8 @@ const Names = () => {
         return (
         
       <div style={{display: 'flex', flexDirection: 'column', width: '80%', alignSelf: 'center', marginBottom: "4%"}}>
-          Enter names for up to 4 group members
-              <input
+          <p style={{"fontSize": "20pt", "fontFamily": "Raleway"}}> Enter names for up to 4 group members </p>              
+          <input
                     value={names.name1}
                     type="text"
                     onChange={(e) => {
@@ -56,14 +56,26 @@ const Names = () => {
                         handleChange(e.target.value, "name4")
                     }}
                     name="name4"
+                />
+
+                <p style={{"marginTop": "3%", "fontSize": "20pt", "fontFamily": "raleway"}}> Enter your instructor's name </p>
+
+                <input
+                    value={names.instructor}
+                    type="text"
+                    onChange={(e) => {
+                        update_names(e.target.value, "instructor")
+                        handleChange(e.target.value, "instructor")
+                    }}
+                    name="instructor"
                 />
           
         </div>
         )
       } else {
         return (
-        <div style={{display: 'flex', flexDirection: 'column', width: '60%', alignSelf: 'center', marginBottom: "4%"}}>
-          Enter names for up to 4 group members
+        <div style={{display: 'flex', flexDirection: 'column', width: '50%', alignSelf: 'center', marginBottom: "4%"}}>
+          <p style={{"marginTop": "3%", "fontSize": "20pt", "fontFamily": "raleway"}}> Enter names for up to 4 group members. </p>              
               <input
                     value={names.name1}
                     type="text"
@@ -100,7 +112,17 @@ const Names = () => {
                     }}
                     name="name4"
                 />
-          
+
+                <p style={{"marginTop": "3%", "fontSize": "20pt", "fontFamily": "raleway"}}> Enter your instructor's name </p>
+                <input
+                    value={names.instructor}
+                    type="text"
+                    onChange={(e) => {
+                        update_names(e.target.value, "instructor")
+                        handleChange(e.target.value, "instructor")
+                    }}
+                    name="instructor"
+                />         
         </div>
         )
       }

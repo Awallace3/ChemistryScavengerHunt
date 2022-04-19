@@ -7,6 +7,7 @@ CREATE TABLE user (
   user2 TEXT,
   user3 TEXT,
   user4 TEXT,
+  instructor TEXT,
   curscore INTEGER,
   totalscore INTEGER,
   timestamp DATE
