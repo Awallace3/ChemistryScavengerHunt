@@ -13,6 +13,7 @@ from flask import (
     jsonify,
 )
 
+
 import sqlite3
 
 from flaskr.db import get_db
@@ -20,6 +21,54 @@ from flask_cors import CORS  # comment on deployment
 
 bp = Blueprint("/api", __name__, url_prefix="/api")
 
+# This route makes a cookie when the user begins the scavenger hunt. It will assign a UUID to the user's cookie.
+@bp.route("/begin", methods=["POST"])
+def start():
+    import uuid
+    if request.method == "POST":
+        # Read request to see if the user has a cookie.
+        if request.cookies.get('uuid') != None:
+            uuid = request.cookies.get('uuid')
+            return reload_session()
+
+        # If not, insert data into DB and create a cookie.
+        else:
+            try:
+                content = dict(request.json)
+                namesDict = content["names"]
+                
+                # Generate UUID.
+                uuid = str(uuid.uuid4())
+
+                # Drop cookie onto user's browser.
+                response = jsonify({"uuid": uuid})
+                response.set_cookie("uuid", uuid)
+                
+                # Connect to database.
+                db = get_db()
+                # Insert UUID into database.
+                db.execute(
+                            "INSERT INTO user (uuid, username, user2, user3, user4, instructor, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                            (
+                                uuid,
+                                namesDict["name1"],
+                                namesDict["name2"],
+                                namesDict["name3"],
+                                namesDict["name4"],
+                                namesDict["instructor"],
+                                content["date"],
+                            ),
+                ),
+
+                db.commit() 
+
+                print("got here2!")
+                return response
+
+            except db.IntegrityError:
+                print("got here!")
+                error = "Someone with that name has already submitted!"
+                return (error, 500)
 
 @bp.route("/submitscores", methods=["POST"])
 def submit_scores():
@@ -35,21 +84,7 @@ def submit_scores():
                 namesDict = content["names"]
                 gScore = content["gScore"]
 
-                db.execute(
-                    "INSERT INTO user (username, user2, user3, user4, instructor, curscore, totalscore, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    (
-                        namesDict["name1"],
-                        namesDict["name2"],
-                        namesDict["name3"],
-                        namesDict["name4"],
-			namesDict["instructor"],
-                        gScore["curScore"],
-                        gScore["totScore"],
-                        content["date"],
-                    ),
-                ),
-                db.commit()
-
+         
                 for x in content["stations"]:
                     db.execute(
                         "INSERT INTO stations (username, clue, station, answer1, answer2, canswer1, canswer2, score1, score2, attempt, percentError) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -136,3 +171,7 @@ def submit():
             except db.IntegrityError:
                 error = "Someone with that name has already submitted!"
                 return (error, 500)
+
+
+def reload_session():
+    return ("already registered", 200)
