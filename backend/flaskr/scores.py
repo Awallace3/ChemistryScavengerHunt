@@ -1,5 +1,3 @@
-import functools
-
 from flask import (
     Blueprint,
     flash,
@@ -13,13 +11,14 @@ from flask import (
     jsonify,
 )
 
-
 import sqlite3
 
 from flaskr.db import get_db
 from flask_cors import CORS  # comment on deployment
 
 bp = Blueprint("/api", __name__, url_prefix="/api")
+
+# NEED TESTS.
 
 # This route makes a cookie when the user begins the scavenger hunt. It will assign a UUID to the user's cookie.
 @bp.route("/begin", methods=["POST"])
@@ -28,8 +27,8 @@ def start():
     if request.method == "POST":
         # Read request to see if the user has a cookie.
         if request.cookies.get('uuid') != None:
-            uuid = request.cookies.get('uuid')
-            return reload_session()
+            user_uuid = request.cookies.get('uuid')
+            return reload_session(user_uuid)
 
         # If not, insert data into DB and create a cookie.
         else:
@@ -62,17 +61,56 @@ def start():
 
                 db.commit() 
 
-                print("got here2!")
+                # print("got here2!")
                 return response
 
             except db.IntegrityError:
-                print("got here!")
+                # print("got here!")
                 error = "Someone with that name has already submitted!"
                 return (error, 500)
 
+def return_station_data(db, user_uuid):
+        response = []
+
+        stations = db.execute(
+            "SELECT * FROM stations WHERE uuid = '{}'".format(user_uuid)
+        ).fetchall()
+
+        # Convert to list of dictionaries for each station.
+        for item in stations:
+                response.append({k: item[k] for k in item.keys()})
+
+        return response
+
+def calculate_score(db, user_uuid):
+    score = 0.0
+    stations = return_station_data(db, user_uuid)
+    for s in stations:
+        score += (s["score1"] + s["score2"])
+
+    # Each question submitted is worth 15 points.
+    total = len(stations) * 15
+
+    return score, total
+
+# I don't remember what the SQL command to update a field is.
+def update_scores(db, user_uuid):
+    score, tot = calculate_score(db, user_uuid)
+
+    # insert SQL push 
+
+    return ("", 200)    
+
+# This should take the submissions, one at a time. Though, it can take more than
+# one at a time, if necessary.
 @bp.route("/submitscores", methods=["POST"])
 def submit_scores():
     if request.method == "POST":
+        # You need a cookie.
+        if request.cookies.get('uuid') == None:
+            return("", 405)
+
+        user_uuid = request.cookies.get('uuid')
         content = dict(request.json)
         print(content)
 
@@ -81,15 +119,11 @@ def submit_scores():
 
         if error is None:
             try:
-                namesDict = content["names"]
-                gScore = content["gScore"]
-
-         
                 for x in content["stations"]:
                     db.execute(
-                        "INSERT INTO stations (username, clue, station, answer1, answer2, canswer1, canswer2, score1, score2, attempt, percentError) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                        "INSERT INTO stations (uuid, clue, station, answer1, answer2, canswer1, canswer2, score1, score2, attempt, percentError) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                         (
-                            namesDict["name1"],
+                            user_uuid,
                             x["clue"],
                             x["station"],
                             x["answer1"],
@@ -103,15 +137,20 @@ def submit_scores():
                         ),
                     ),
 
+                    # Check for edge case where same station is submitted twice?
+                    # Austin shouldn't render it in such a case.
+
                     # print(content["name"], x["station"], x["answer1"], x["answer2"], x["score"], x["attempt"]),
+
+                    resp = update_scores(db, user_uuid)
 
                     db.commit()
 
-                return ("", 200)
+                return resp
 
             except db.IntegrityError:
                 print("got here!")
-                error = "Someone with that name has already submitted!"
+                error = "You have already submitted!"
                 return (error, 500)
 
 
@@ -173,5 +212,33 @@ def submit():
                 return (error, 500)
 
 
-def reload_session():
-    return ("already registered", 200)
+# The user has already started the scavenger hunt.
+def reload_session(user_uuid):
+    # Check the database for the user's information.
+    try: 
+        data = []
+
+        db = get_db()
+
+        db.row_factory = sqlite3.Row
+
+        # There should only be one entry per uuid...
+        res = db.execute(
+            "SELECT * FROM user WHERE uuid = '{}'".format(user_uuid)
+        ).fetchone()
+
+        # Convert result to dictionary. Append to data list.
+        data.append(dict(res))
+
+        # Now, we can get the stations data.
+
+        stations = return_station_data(db, user_uuid)
+        for s in stations:
+            data.append(s)
+
+        return jsonify(data)
+
+    except db.DatabaseError:
+            error = "Could not find the entry in the database!"
+            return (error, 500)
+
