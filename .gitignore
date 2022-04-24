@@ -43,3 +43,6 @@ backend/frontend/.eslintcache
 .package-lock
 flaskr.sqlite
 backend/frontend/.eslintcache
+yarn.lock
+*lock
+backend/frontend/package-lock.json
