@@ -46,7 +46,7 @@ const eventReducer = (state, action) => {
             let a1 = false
             let a2 = false
             let u_stations2 = state.stations
-            
+
             if (state.stations[state.position].answer1 === state.stations[state.position].c_answer1){
                 a1 = true
                 if (state.stations[state.position].score1 === 0){
@@ -85,7 +85,7 @@ const eventReducer = (state, action) => {
                 }
             // 2% error
             return {
-                ...state, stations: u_stations2, 
+                ...state, stations: u_stations2,
                 correct1: a1, correct2: a2, complete: complete
             }
         case 'next_question':
@@ -134,13 +134,26 @@ const randomize_questions = (dispatch) => (stations) => {
 
 const update_answer = (dispatch) => (answer, ansNum) => {
     dispatch({type: 'answer', payload: {answer, ansNum}})
-} 
+}
 
 const submit_answers = (dispatch) => (attempts) => {
     dispatch({type: 'submit', payload: attempts})
 }
 
-const next_question = (dispatch) => (attempts) => {
+const next_question = (dispatch) => async (attempts, state) => {
+    try {
+        // const response = await instance.post('/api/end/point', progress);
+        const step = {
+            date: state.date,
+            gScore: state.gScore,
+            names: state.names,
+            stations: state.stations
+        }
+        console.log("step\n", step)
+        const step_response = await instance.post('/api/end/point', step);
+    } catch (error ) {
+        console.log(error)
+    }
     dispatch({type: 'next_question', payload: attempts})
 }
 
@@ -171,14 +184,14 @@ const final_submit_results = (dispatch) => async (state) => {
             type: 'final_submit_results',
             payload: 2
         })
-    } 
+    }
 };
 
 const get_leaderboard = (dispatch) => async () => {
     try {
         const response = await instance.get('/api/getscores');
         console.log(response)
-        var data = response.data 
+        var data = response.data
         //data = sortByKey(data, 'curscore')
         data = sortByKey(data, 'curscore').reverse()
         dispatch({ type: 'get_leaderboard', payload: data })
@@ -188,7 +201,7 @@ const get_leaderboard = (dispatch) => async () => {
         dispatch({
             type: 'get_leaderboard'
         })
-    }    
+    }
 }
 
 const survey_name = (dispatch) => (name) => {
@@ -198,16 +211,16 @@ const survey_name = (dispatch) => (name) => {
 
 export const { Provider, Context } = createDataContext(
     eventReducer,
-    { 
+    {
         randomize_questions, update_answer,
         submit_answers, next_question,
         count_total_score, update_names,
         final_submit_results, get_leaderboard
     },
-    { 
+    {
         position: 0,
         correct1: false, correct2: false,
-        complete: false, 
+        complete: false,
         api_status: 0,
         final_results_submit: '',
         /*
@@ -223,7 +236,7 @@ export const { Provider, Context } = createDataContext(
         date: "2021-12-02",
         leaderboard: [],
         gScore: {
-            curScore: 0, 
+            curScore: 0,
             totScore: 150
         },
         names: {
@@ -242,7 +255,7 @@ export const { Provider, Context } = createDataContext(
             "name4": "d",
         },
           */
-         
+
           stations: shuffle([
             {
                 "clue": "Where would you go to print a poster before a conference or to use a desktop computer while looking out the window toward the Thad Cochran Center? (4th floor)",
@@ -365,7 +378,7 @@ export const { Provider, Context } = createDataContext(
                 "percent_error": 0.02
             },
           ]),
-          
+
          /*
           stations: shuffle([
             {
@@ -408,5 +421,5 @@ export const { Provider, Context } = createDataContext(
         */
           //
     }
-) 
+)
 

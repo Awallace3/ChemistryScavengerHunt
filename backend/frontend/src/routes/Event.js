@@ -9,7 +9,7 @@ import EventQuestion from '../components/EventQuestion';
 function Event() {
     const { state, final_submit_results }  = useContext(EventContext)
     const history = useHistory();
-   
+
     const [isDisabled, setIsDisabled] = useState(false)
     const handleSubmitClicked = () => {
         setIsDisabled(true)
@@ -30,25 +30,23 @@ function Event() {
 
     if (isMobile) {
       return (
-        <div className="background-container"> 
+        <div className="background-container">
           <div className="event-score-container">
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
-
           <EventQuestion/>
-
             {
               state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null
             }
           {
             state.complete ? <>
-            <Button 
-              variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
+            <Button
+              variant="primary" size="lg" style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}}
               onClick={() =>  {
                 final_submit_results(state)
                 handleSubmitClicked()
               }}
-              disabled={isDisabled} 
+              disabled={isDisabled}
             >Submit Final Results!</Button>
           </>
           : null
@@ -65,8 +63,8 @@ function Event() {
       )
 
     } else {
-      return ( 
-        <div className="background-container"> 
+      return (
+        <div className="background-container">
           <div className="event-score-container">
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
@@ -78,9 +76,9 @@ function Event() {
             }
           {
             state.complete ? <>
-            <Button 
-              variant="primary" size="lg" 
-              style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}} 
+            <Button
+              variant="primary" size="lg"
+              style={{width: "60vw", alignSelf: "center", backgroundColor: "#932432", borderColor: "#f3f3f3"}}
               onClick={() =>  {
                 final_submit_results(state)
                 handleSubmitClicked()
@@ -90,18 +88,15 @@ function Event() {
           </>
           : null
         }
-
         <div>
                 <a href="mailto:amwalla3@go.olemiss.edu">
                     <p>Issues? Email: amwalla3@go.olemiss.edu</p>
                 </a>
         </div>
-
-
         </div>
       )
     }
 }
-    
+
 
 export default Event;

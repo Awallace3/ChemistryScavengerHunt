@@ -25,23 +25,23 @@ const eval_to_user = (attempt, err) => {
 const EventQuestion = () => {
     const [attempts, setAttempts] = useState(0)
     const [textInput, setTextInput] = useState('')
-    const { 
-        state, update_answer, 
+    const {
+        state, update_answer,
         submit_answers, next_question,
         count_total_score
     } = useContext(EventContext)
-    
+
     const station = state.stations[state.position];
     function submission() {
         setAttempts(attempts+1)
-        submit_answers(attempts)
+        submit_answers(attempts, state)
         count_total_score()
     }
 
     if (isMobile) {
         return (
-          <div className="big-event-container"> 
-       
+          <div className="big-event-container">
+
            <div className="event-container">
 
             <img src={Atom} alt='AtomImage' style={{alignSelf: "center", width: "100px", heiht: "auto"}}/>
@@ -49,13 +49,13 @@ const EventQuestion = () => {
             <div className="event-header-container">
               <p>Station: {station.station}</p>
               <p1>Clue: {station.clue}</p1>
-            </div> 
+            </div>
 
             <div className="event-container-bottom">
                 <p>Multiple Choice Answer</p>
                 <form className={"radio-form"}>
 
-                    <label> 
+                    <label>
                         <input
                         type="radio"
                         value="A"
@@ -65,7 +65,7 @@ const EventQuestion = () => {
                         A
                     </label>
 
-                    <label> 
+                    <label>
                         <input
                         type="radio"
                         value="B"
@@ -73,10 +73,10 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         B
-                    
-                    </label> 
-                    
-                    <label> 
+
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="C"
@@ -84,9 +84,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         C
-                    </label> 
-                    
-                    <label> 
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="D"
@@ -94,9 +94,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         D
-                    </label> 
-                    
-                    <label> 
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="E"
@@ -104,41 +104,41 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         E
-                    </label> 
+                    </label>
 
                     {eval_to_user(attempts, state.correct1)}
-                   
+
                     <div>
-                   
+
                     </div>
                 </form>
 
               <div style={{flexDirection: 'row'}}>
                 <p>Free Response Answer:</p>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     onChange={(answer) => {
                         update_answer(answer.target.value, 'answer2')
                         setTextInput(answer.target.value)
                     }
                     }
                     value={textInput}
-                    
+
                     />
                 {eval_to_user(attempts, state.correct2)}
               </div>
-            
-            {attempts > 0 ? 
+
+            {attempts > 0 ?
                 <p>Attempts Submitted: {attempts}</p> : null
             }
-            
+
             </div>
             <Button variant="btn btn-success" style={{marginTop: "5%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}onClick={(e) => submission() }>Submit Answers!</Button>
 
             {
                 state.correct1 && state.correct2 && attempts > 0 && (state.position < state.stations.length - 1) ? (
                     <Button variant="btn btn-success" style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}} onClick={() => {
-                        next_question(attempts) 
+                        next_question(attempts)
                         setTextInput("")
                         setAttempts(0)
                     }
@@ -151,7 +151,7 @@ const EventQuestion = () => {
                     <Button variant="btn btn-success"
                     style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}
                     onClick={() => {
-                        next_question(attempts) 
+                        next_question(attempts)
                         setTextInput("")
                         setAttempts(0)
                     }
@@ -160,13 +160,13 @@ const EventQuestion = () => {
             }
 
 
-            </div>      
+            </div>
           </div>
         )
       } else {
-        return ( 
-         <div className="big-event-container"> 
-       
+        return (
+         <div className="big-event-container">
+
            <div className="event-container-full">
 
             <img src={Atom} alt='AtomImage' style={{alignSelf: "center", width: "200px", heiht: "auto"}}/>
@@ -174,13 +174,13 @@ const EventQuestion = () => {
             <div className="event-header-container">
               <p>Station: {station.station}</p>
               <p1>Clue: {station.clue}</p1>
-            </div> 
+            </div>
 
             <div className="event-container-bottom">
                 <p>Multiple Choice Answer</p>
                 <form className={"radio-form"}>
 
-                    <label> 
+                    <label>
                         <input
                         type="radio"
                         value="A"
@@ -190,7 +190,7 @@ const EventQuestion = () => {
                         A
                     </label>
 
-                    <label> 
+                    <label>
                         <input
                         type="radio"
                         value="B"
@@ -198,10 +198,10 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         B
-                    
-                    </label> 
-                    
-                    <label> 
+
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="C"
@@ -209,9 +209,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         C
-                    </label> 
-                    
-                    <label> 
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="D"
@@ -219,9 +219,9 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         D
-                    </label> 
-                    
-                    <label> 
+                    </label>
+
+                    <label>
                         <input
                         type="radio"
                         value="E"
@@ -229,41 +229,41 @@ const EventQuestion = () => {
                         onChange={(answer) => update_answer(answer.target.value, 'answer1')}
                         />
                         E
-                    </label> 
+                    </label>
 
                     {eval_to_user(attempts, state.correct1)}
-                   
+
                     <div>
-                   
+
                     </div>
                 </form>
 
               <div style={{flexDirection: 'row'}}>
                 <p>Free Response Answer:</p>
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     onChange={(answer) => {
                         update_answer(answer.target.value, 'answer2')
                         setTextInput(answer.target.value)
                     }
                     }
                     value={textInput}
-                    
+
                     />
                 {eval_to_user(attempts, state.correct2)}
               </div>
-            
-            {attempts > 0 ? 
+
+            {attempts > 0 ?
                 <p>Attempts Submitted: {attempts}</p> : null
             }
-            
+
             </div>
             <Button variant="btn btn-success" style={{marginTop: "5%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}onClick={(e) => submission() }>Submit Answers!</Button>
 
             {
                 state.correct1 && state.correct2 && attempts > 0 && (state.position < state.stations.length - 1) ? (
                     <Button variant="btn btn-success" style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}} onClick={() => {
-                        next_question(attempts) 
+                        next_question(attempts)
                         setTextInput("")
                         setAttempts(0)
                     }
@@ -276,7 +276,7 @@ const EventQuestion = () => {
                     <Button variant="btn btn-success"
                     style={{marginTop: "2%", width: "75%", alignSelf: "center", backgroundColor:"#3c1874"}}
                     onClick={() => {
-                        next_question(attempts) 
+                        next_question(attempts)
                         setTextInput("")
                         setAttempts(0)
                     }
@@ -285,8 +285,8 @@ const EventQuestion = () => {
             }
 
 
-            </div>      
-          </div> 
+            </div>
+          </div>
           )
       }
 
