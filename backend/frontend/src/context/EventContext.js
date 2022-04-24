@@ -140,7 +140,7 @@ const submit_answers = (dispatch) => (attempts) => {
     dispatch({type: 'submit', payload: attempts})
 }
 
-const next_question = (dispatch) => (attempts, state) => {
+const next_question = (dispatch) => async (attempts, state) => {
     try {
         // const response = await instance.post('/api/end/point', progress);
         const step = {
