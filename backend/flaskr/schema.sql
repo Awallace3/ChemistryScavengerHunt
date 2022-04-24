@@ -2,11 +2,12 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  uuid TEXT PRIMARY KEY,
   username TEXT NOT NULL,
   user2 TEXT,
   user3 TEXT,
   user4 TEXT,
+  instructor TEXT,
   curscore INTEGER,
   totalscore INTEGER,
   timestamp DATE
