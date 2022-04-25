@@ -98,6 +98,9 @@ def update_scores(db, user_uuid):
     score, tot = calculate_score(db, user_uuid)
 
     # insert SQL push 
+    db.execute(
+        "UPDATE user SET curscore = {}, totalscore = {} WHERE uuid = '{}'".format(score, tot, user_uuid)
+        )
 
     return ("", 200)    
 
