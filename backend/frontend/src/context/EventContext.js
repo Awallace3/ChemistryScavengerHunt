@@ -347,6 +347,7 @@ const survey_name = (dispatch) => (name) => {
 };
 
 const begin_event = (dispatch) => async (state) => {
+  // check response, if stations returned then pop off matching from array
   try {
     const bodyContent = JSON.stringify({
       names: state.names,
