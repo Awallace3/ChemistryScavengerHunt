@@ -156,7 +156,8 @@ const eventReducer = (state, action) => {
       return { ...state, uuid: action.payload };
     case "get_leaderboard":
       if (action.payload) {
-        return { ...state, leaderboard: action.payload };
+          var sor = action.payload.sort((a,b) => (a.curscore < b.curscore) ? 1 : -1)
+        return { ...state, leaderboard: sor };
       } else {
         return { ...state };
       }
@@ -202,16 +203,16 @@ const next_question = (dispatch) => async (attempts, state) => {
       method: "POST",
       body: bodyContent,
       headers: headersList,
-    })
-      console.log('res', response)
-     //.then((res) => {
-     //  let cookie = res.headers;
-     //  console.log("cookie:", res);
-     //  return res.text();
-     //})
-     //.then(function (data) {
-     //  console.log(data);
-     //});
+    });
+    console.log("res", response);
+    //.then((res) => {
+    //  let cookie = res.headers;
+    //  console.log("cookie:", res);
+    //  return res.text();
+    //})
+    //.then(function (data) {
+    //  console.log(data);
+    //});
 
     //const response = await fetch("http://localhost:5000/api/submitscores", {
     //  mode: "no-cors",
@@ -295,8 +296,8 @@ const final_submit_results = (dispatch) => async (state) => {
       method: "POST",
       body: bodyContent,
       headers: headersList,
-    })
-      console.log('res', response)
+    });
+    console.log("res", response);
     dispatch({ type: "final_submit_results", payload: 1 });
   } catch (err) {
     console.log("Error:");
@@ -310,12 +311,25 @@ const final_submit_results = (dispatch) => async (state) => {
 
 const get_leaderboard = (dispatch) => async () => {
   try {
-    const response = await instance.get("/api/getscores");
-    console.log(response);
-    var data = response.data;
-    //data = sortByKey(data, 'curscore')
-    data = sortByKey(data, "curscore").reverse();
-    dispatch({ type: "get_leaderboard", payload: data });
+    // const response = await instance.get("/api/getscores");
+    // console.log(response);
+    // var data = response.data;
+    // //data = sortByKey(data, 'curscore')
+    // data = sortByKey(data, "curscore").reverse();
+
+    let headersList = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      credentials: "same-origin",
+      mode: "same-origin",
+    };
+    //const response =
+    await fetch("/api/getscores", {
+      method: "GET",
+      headers: headersList,
+    }).then((response) => response.json())
+      .then((data) => dispatch({ type: "get_leaderboard", payload: data}));
+    //dispatch({ type: "get_leaderboard", payload: ""});
   } catch (err) {
     console.log("Error:");
     console.log(err);
@@ -341,21 +355,21 @@ const begin_event = (dispatch) => async (state) => {
       credentials: "same-origin",
       mode: "same-origin",
     };
-//const response =
-     await fetch("/api/begin", {
+    //const response =
+    await fetch("/api/begin", {
       method: "POST",
       body: bodyContent,
       headers: headersList,
     })
-     // console.log('res', response)
-     .then((res) => {
-       //let cookie = res.headers;
-       console.log("cookie:", res.json());
-       return res;
-     })
-     //.then(function (data) {
-     //  console.log(data);
-     //});
+      // console.log('res', response)
+      .then((res) => {
+        //let cookie = res.headers;
+        console.log("cookie:", res.json());
+        return res;
+      });
+    //.then(function (data) {
+    //  console.log(data);
+    //});
     // .then(function (response) {
     //     console.log(response.text());
     // })
@@ -434,7 +448,7 @@ export const { Provider, Context } = createDataContext(
     leaderboard: [],
     gScore: {
       curScore: 0,
-      totScore: 150,
+      totScore: 100,
     },
     uuid: "",
     names: {
@@ -451,7 +465,7 @@ export const { Provider, Context } = createDataContext(
         answer1: "",
         answer2: "",
         c_answer1: "C",
-        c_answer2: 2.2,
+        c_answer2: "A",
         score1: 0,
         score2: 0,
         attempt: 0,
@@ -487,7 +501,7 @@ export const { Provider, Context } = createDataContext(
         answer1: "",
         answer2: "",
         c_answer1: "D",
-        c_answer2: "",
+        c_answer2: "A",
         score1: 0,
         score2: 0,
         attempt: 0,
@@ -511,7 +525,7 @@ export const { Provider, Context } = createDataContext(
         answer1: "",
         answer2: "",
         c_answer1: "A",
-        c_answer2: "",
+        c_answer2: "B",
         score1: 0,
         score2: 0,
         attempt: 0,
@@ -522,8 +536,8 @@ export const { Provider, Context } = createDataContext(
         station: "I",
         answer1: "",
         answer2: "",
-        c_answer1: "",
-        c_answer2: "",
+        c_answer1: "C",
+        c_answer2: "C",
         score1: 0,
         score2: 0,
         attempt: 0,
@@ -534,8 +548,8 @@ export const { Provider, Context } = createDataContext(
         station: "J",
         answer1: "",
         answer2: "",
-        c_answer1: "A",
-        c_answer2: "",
+        c_answer1: "E",
+        c_answer2: "A",
         score1: 0,
         score2: 0,
         attempt: 0,
@@ -547,7 +561,7 @@ export const { Provider, Context } = createDataContext(
         answer1: "",
         answer2: "",
         c_answer1: "A",
-        c_answer2: "",
+        c_answer2: "C",
         score1: 0,
         score2: 0,
         attempt: 0,
