@@ -14,8 +14,8 @@ def create_app(test_config=None):
          origins=[
              "http://localhost:3000", "http://localhost:3000/Event",
              "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
-             "http://chemscav.com", "http://chemscav.com/Event"
-             "http://194.195.211.203:443", "http://194.195.211.203:443"
+             "https://chemscav.com", "https://chemscav.com/Event"
+             "https://194.195.211.203:443", "https://194.195.211.203:443/Event"
          ],
          support_credentials=True,
          expose_headers=["Cookie", 'set-cookie'])
