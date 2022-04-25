@@ -189,7 +189,7 @@ const next_question = (dispatch) => async (attempts, state) => {
       // date: state.date,
       // gScore: state.gScore,
       // names: state.names,
-      stations: state.stations,
+      stations: [state.stations[state.position]],
     };
     console.log("step\n", step);
 
@@ -284,7 +284,7 @@ const final_submit_results = (dispatch) => async (state) => {
       // date: state.date,
       // gScore: state.gScore,
       // names: state.names,
-      stations: state.stations,
+      stations: [state.stations[state.position]],
     };
     let headersList = {
       Accept: "*/*",
