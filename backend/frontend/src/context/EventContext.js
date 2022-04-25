@@ -156,7 +156,9 @@ const eventReducer = (state, action) => {
       return { ...state, uuid: action.payload };
     case "get_leaderboard":
       if (action.payload) {
-          var sor = action.payload.sort((a,b) => (a.curscore < b.curscore) ? 1 : -1)
+        var sor = action.payload.sort((a, b) =>
+          a.curscore < b.curscore ? 1 : -1
+        );
         return { ...state, leaderboard: sor };
       } else {
         return { ...state };
@@ -327,8 +329,9 @@ const get_leaderboard = (dispatch) => async () => {
     await fetch("/api/getscores", {
       method: "GET",
       headers: headersList,
-    }).then((response) => response.json())
-      .then((data) => dispatch({ type: "get_leaderboard", payload: data}));
+    })
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: "get_leaderboard", payload: data }));
     //dispatch({ type: "get_leaderboard", payload: ""});
   } catch (err) {
     console.log("Error:");
