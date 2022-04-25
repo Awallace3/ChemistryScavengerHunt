@@ -149,7 +149,7 @@ html, body {
   display: flex;
   flex-direction: column;
   background-color: #3f3d3b;
-  min-height: 100vh;  
+  min-height: 100vh;
   min-width: 100vw;
 }
 
@@ -389,13 +389,13 @@ html, body {
   flex-direction: column;
 }
 
-.event-header-container p {
+.event-header-container-p {
   font-size: 1.5rem;
   margin: 0;
 }
 
-.event-header-container p1 {
-  font-size: 1rem;
+.p1 {
+  font-size: 1.0rem;
   margin: 0;
   padding: 10px;
 }
@@ -422,7 +422,7 @@ html, body {
 }
 
 .home-buttons {
-  align-self: "center"; 
+  align-self: "center";
   background-color: "#f3f3f3";
 }
 
