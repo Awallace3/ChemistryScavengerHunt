@@ -9,10 +9,12 @@ from flask_cors import CORS  # comment on deployment
 
 bp = Blueprint("/api", __name__, url_prefix="/api")
 CORS(bp,
-     origins=[
-         "http://localhost:3000", "http://localhost:3000/Event",
-         "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
-     ],
+         origins=[
+             "http://localhost:3000", "http://localhost:3000/Event",
+             "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+             "http://chemscav.com", "http://chemscav.com/Event"
+             "http://194.195.211.203:443", "http://194.195.211.203:443"
+         ],
      support_credentials=True,
      expose_headers=["Cookie", 'set-cookie'])
 # CORS(bp,
@@ -41,7 +43,7 @@ def start():
         # If not, insert data into DB and create a cookie.
         else:
             return make_cookie(request)
-            
+
 def make_cookie(request):
     import uuid
     db = get_db()
