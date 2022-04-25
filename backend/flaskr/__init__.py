@@ -5,11 +5,9 @@ from flask_cors import CORS  # comment on deployment
 
 
 def create_app(test_config=None):
-    #app = Flask(__name__, instance_relative_config=True)
     app = Flask(__name__,
-                static_folder='../frontend/build',
-                static_url_path='/')
-    # CORS(app, resources={r"/api/*": {"origins": "https://localhost:3000"}})
+                 static_folder='../frontend/build',
+                 static_url_path='/')
     CORS(app,
          origins=[
              "http://localhost:3000", "http://localhost:3000/Event",
@@ -51,3 +49,5 @@ def create_app(test_config=None):
     app.register_blueprint(scores.bp)
 
     return app
+
+app = create_app()

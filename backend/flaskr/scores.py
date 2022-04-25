@@ -1,4 +1,3 @@
-from tkinter import N
 from flask import (Blueprint, flash, g, json, redirect, render_template,
                    request, session, url_for, jsonify, make_response)
 
