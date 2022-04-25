@@ -232,6 +232,7 @@ function Survey() {
                 
                 5 = Strongly Agree / Too Easy
             </p>
+            {/* We should remove the name field. Good surveys are anonymous. */}
             <p > Please enter first and last name: </p>
             <input 
                     type="text" style={{width  : "60vw", alignSelf: "center"}}
