@@ -198,7 +198,7 @@ const next_question = (dispatch) => async (attempts, state) => {
     };
 
     let bodyContent = JSON.stringify(step);
-    const response = fetch("/api/submitscores", {
+    const response = fetch("http://localhost:5000/api/submitscores", {
       method: "POST",
       body: bodyContent,
       headers: headersList,
@@ -321,18 +321,18 @@ const begin_event = (dispatch) => async (state) => {
       credentials: "same-origin",
       mode: "same-origin",
     };
-//const response =
-     await fetch("/api/begin", {
+
+    const response = await fetch("http://127.0.0.1:5000/api/begin", {
       method: "POST",
       body: bodyContent,
       headers: headersList,
     })
-     // console.log('res', response)
-     .then((res) => {
-       //let cookie = res.headers;
-       console.log("cookie:", res.json());
-       return res;
-     })
+      console.log('res', response)
+     //.then((res) => {
+     //  let cookie = res.headers;
+     //  console.log("cookie:", res);
+     //  return res.text();
+     //})
      //.then(function (data) {
      //  console.log(data);
      //});

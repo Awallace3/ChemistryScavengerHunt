@@ -19,9 +19,9 @@ function Home() {
   const history = useHistory();
   const begin = () => {
     if ( state.names.name1 !== '' ){
-      history.push('/Event')
       setNeedName(false)
       begin_event(state)
+      history.push('/Event')
     } else {
       setNeedName(true)
     }

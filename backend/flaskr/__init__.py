@@ -10,7 +10,12 @@ def create_app(test_config=None):
                 static_folder='../frontend/build',
                 static_url_path='/')
     # CORS(app, resources={r"/api/*": {"origins": "https://localhost:3000"}})
-    CORS(app, support_credentials=True, expose_headers="Cookie")
+    CORS(app,
+         origins=["http://localhost:3000", "http://localhost:3000/Event",
+             "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+             ],
+         support_credentials=True,
+         expose_headers=["Cookie", 'set-cookie'])
 
     #CORS(app) # comment on deployment
     app.config.from_mapping(

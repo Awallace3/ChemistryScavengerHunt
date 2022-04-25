@@ -1,24 +1,25 @@
-from flask import (
-    Blueprint,
-    flash,
-    g,
-    json,
-    redirect,
-    render_template,
-    request,
-    session,
-    url_for,
-    jsonify,
-)
+from flask import (Blueprint, flash, g, json, redirect, render_template,
+                   request, session, url_for, jsonify, make_response)
 
 import sqlite3
 
 from flaskr.db import get_db
 from flask_cors import CORS  # comment on deployment
 
-
 bp = Blueprint("/api", __name__, url_prefix="/api")
-CORS(bp, support_credentials=True, expose_headers="Cookie")
+CORS(bp,
+     origins=[
+         "http://localhost:3000", "http://localhost:3000/Event",
+         "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+     ],
+     support_credentials=True,
+     expose_headers=["Cookie", 'set-cookie'])
+# CORS(bp,
+#          origins=["http://localhost:3000", "http://localhost:3000/Event",
+#              "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+#              ],
+#      support_credentials=True,
+#      expose_headers="Cookie")
 
 # NEED TESTS.
 
@@ -43,9 +44,10 @@ def start():
                 uuid = str(uuid.uuid4())
 
                 # Drop cookie onto user's browser.
-                response = jsonify({"uuid": uuid})
+                # response = jsonify({"uuid": uuid})
+                response = make_response(jsonify({"uuid": uuid}))
                 response.set_cookie("uuid", uuid)
-                response.headers.add('Access-Control-Allow-Origin', '*')
+                # response.headers.add('Access-Control-Allow-Origin', '*')
 
                 # Connect to database.
                 db = get_db()
@@ -103,10 +105,10 @@ def calculate_score(db, user_uuid):
 def update_scores(db, user_uuid):
     score, tot = calculate_score(db, user_uuid)
 
-    # insert SQL push 
+    # insert SQL push
     db.execute(
-        "UPDATE user SET curscore = {}, totalscore = {} WHERE uuid = '{}'".format(score, tot, user_uuid)
-        )
+        "UPDATE user SET curscore = {}, totalscore = {} WHERE uuid = '{}'".
+        format(score, tot, user_uuid))
 
 
 # This should take the submissions, one at a time. Though, it can take more than
@@ -155,8 +157,11 @@ def submit_scores():
                     resp = update_scores(db, user_uuid)
 
                     db.commit()
+                    print('resp:', resp)
 
-                return resp
+                # return resp
+                # TODO: return resp was causing error so returned string200. I might have did something wrong with the merge
+                return ('success', 200)
 
             except db.IntegrityError:
                 print("got here!")
