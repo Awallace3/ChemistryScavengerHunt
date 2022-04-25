@@ -183,9 +183,9 @@ const next_question = (dispatch) => async (attempts, state) => {
   try {
     // const response = await instance.post('/api/end/point', progress);
     const step = {
-      date: state.date,
-      gScore: state.gScore,
-      names: state.names,
+      // date: state.date,
+      // gScore: state.gScore,
+      // names: state.names,
       stations: state.stations,
     };
     console.log("step\n", step);
@@ -259,24 +259,44 @@ const update_names = (dispatch) => (u_name, name_num) => {
 
 const final_submit_results = (dispatch) => async (state) => {
   try {
+    // const final_results = {
+    //   // date: state.date,
+    //   // gScore: state.gScore,
+    //   // names: state.names,
+    //   stations: state.stations,
+    // };
+    // console.log("final_results\n", final_results);
+    // const config = {
+    //   headers: {
+    //     uuid: state.uuid,
+    //   },
+    // };
+    // const response = await instance.post(
+    //   "/api/submitscores",
+    //   final_results,
+    //   config
+    // );
+    // console.log(response);
     const final_results = {
-      date: state.date,
-      gScore: state.gScore,
-      names: state.names,
+      // date: state.date,
+      // gScore: state.gScore,
+      // names: state.names,
       stations: state.stations,
     };
-    console.log("final_results\n", final_results);
-    const config = {
-      headers: {
-        uuid: state.uuid,
-      },
+    let headersList = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      credentials: "same-origin",
+      // mode: "include",
     };
-    const response = await instance.post(
-      "/api/submitscores",
-      final_results,
-      config
-    );
-    console.log(response);
+
+    let bodyContent = JSON.stringify(final_results);
+    const response = fetch("/api/submitscores", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    })
+      console.log('res', response)
     dispatch({ type: "final_submit_results", payload: 1 });
   } catch (err) {
     console.log("Error:");
