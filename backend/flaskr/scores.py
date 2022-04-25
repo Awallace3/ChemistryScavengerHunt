@@ -1,3 +1,4 @@
+from tkinter import N
 from flask import (Blueprint, flash, g, json, redirect, render_template,
                    request, session, url_for, jsonify, make_response)
 
@@ -27,53 +28,61 @@ CORS(bp,
 # This route makes a cookie when the user begins the scavenger hunt. It will assign a UUID to the user's cookie.
 @bp.route("/begin", methods=["POST"])
 def start():
-    import uuid
     if request.method == "POST":
         # Read request to see if the user has a cookie.
         if request.cookies.get('uuid') != None:
             user_uuid = request.cookies.get('uuid')
-            return reload_session(user_uuid)
+            resp = reload_session(user_uuid)
+            if type(resp) == tuple:
+                return make_cookie(request)
+            else:
+                return resp
 
         # If not, insert data into DB and create a cookie.
         else:
-            try:
-                content = dict(request.json)
-                namesDict = content["names"]
+            return make_cookie(request)
+            
+def make_cookie(request):
+    import uuid
+    db = get_db()
+    try:
+        content = dict(request.json)
+        namesDict = content["names"]
 
-                # Generate UUID.
-                uuid = str(uuid.uuid4())
+        # Generate UUID.
+        uuid = str(uuid.uuid4())
 
-                # Drop cookie onto user's browser.
-                # response = jsonify({"uuid": uuid})
-                response = make_response(jsonify({"uuid": uuid}))
-                response.set_cookie("uuid", uuid)
-                # response.headers.add('Access-Control-Allow-Origin', '*')
+        # Drop cookie onto user's browser.
+        # response = jsonify({"uuid": uuid})
+        response = make_response(jsonify({"uuid": uuid}))
+        response.set_cookie("uuid", uuid)
+        # response.headers.add('Access-Control-Allow-Origin', '*')
 
-                # Connect to database.
-                db = get_db()
-                # Insert UUID into database.
-                db.execute(
-                    "INSERT INTO user (uuid, username, user2, user3, user4, instructor, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (
-                        uuid,
-                        namesDict["name1"],
-                        namesDict["name2"],
-                        namesDict["name3"],
-                        namesDict["name4"],
-                        namesDict["instructor"],
-                        content["date"],
-                    ),
-                ),
+        # Connect to database.
+        # Insert UUID into database.
+        db.execute(
+            "INSERT INTO user (uuid, username, user2, user3, user4, instructor, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (
+                uuid,
+                namesDict["name1"],
+                namesDict["name2"],
+                namesDict["name3"],
+                namesDict["name4"],
+                namesDict["instructor"],
+                content["date"],
+            ),
+        ),
 
-                db.commit()
+        db.commit()
 
-                # print("got here2!")
-                return response
+        # print("got here2!")
+        return response
 
-            except db.IntegrityError:
-                # print("got here!")
-                error = "Someone with that name has already submitted!"
-                return (error, 500)
+    except db.IntegrityError:
+        # print("got here!")
+        error = "Someone with that name has already submitted!"
+        return (error, 500)
+
 
 
 def return_station_data(db, user_uuid):
@@ -240,6 +249,9 @@ def reload_session(user_uuid):
         # There should only be one entry per uuid...
         res = db.execute("SELECT * FROM user WHERE uuid = '{}'".format(
             user_uuid)).fetchone()
+
+        if res == None:
+            return ("no cookie", 405)
 
         # Convert result to dictionary. Append to data list.
         data.append(dict(res))
