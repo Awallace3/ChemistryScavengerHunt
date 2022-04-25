@@ -452,11 +452,11 @@ export const { Provider, Context } = createDataContext(
     },
     uuid: "",
     names: {
-      name1: "a",
-      name2: "a",
-      name3: "a",
-      name4: "a",
-      instructor: "t",
+      name1: "",
+      name2: "",
+      name3: "",
+      name4: "",
+      instructor: "",
     },
     stations: shuffle([
       {
