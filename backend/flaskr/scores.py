@@ -96,7 +96,7 @@ def calculate_score(db, user_uuid):
         score += (s["score1"] + s["score2"])
 
     # Each question submitted is worth 15 points.
-    total = len(stations) * 15
+    total = len(stations) * 10
 
     return score, total
 
@@ -154,10 +154,9 @@ def submit_scores():
 
                     # print(content["name"], x["station"], x["answer1"], x["answer2"], x["score"], x["attempt"]),
 
-                    resp = update_scores(db, user_uuid)
+                    update_scores(db, user_uuid)
 
                     db.commit()
-                    print('resp:', resp)
 
                 # return resp
                 # TODO: return resp was causing error so returned string200. I might have did something wrong with the merge
