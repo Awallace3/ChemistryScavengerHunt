@@ -1,5 +1,6 @@
 import createDataContext from "./createDataContext";
 import instance from "../api/API";
+import axios from "axios";
 
 function shuffle(array) {
   let currentIndex = array.length,
@@ -151,6 +152,8 @@ const eventReducer = (state, action) => {
       return { ...state, names: u_names };
     case "final_submit_results":
       return { ...state, api_status: action.payload };
+    case "begin":
+      return { ...state, uuid: action.payload };
     case "get_leaderboard":
       if (action.payload) {
         return { ...state, leaderboard: action.payload };
@@ -186,7 +189,54 @@ const next_question = (dispatch) => async (attempts, state) => {
       stations: state.stations,
     };
     console.log("step\n", step);
-    const step_response = await instance.post("/api/end/point", step);
+
+      let headersList = {
+         "Accept": "*/*",
+         "Content-Type": "application/json",
+         "credentials": "include",
+    }
+
+    let bodyContent = JSON.stringify(step);
+    fetch("http://localhost:5000/api/submitscores", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList
+    }).then(function(response) {
+      return response.text();
+    }).then(function(data) {
+      console.log(data);
+    })
+
+    //const response = await fetch("http://localhost:5000/api/submitscores", {
+    //  mode: "no-cors",
+    //  method: "POST",
+    //  headers: {
+    //    Accept: "application/json",
+    //    "Content-Type": "application/json",
+    //    "Access-Control-Allow-Origin": "localhost:3000",
+    //  },
+    //  credentials: "same-origin",
+    //  body: JSON.stringify(step),
+    //});
+    //console.log("step_response", response);
+
+    //    const axiosConfig = {
+    //      headers: {
+    //        "content-Type": "application/json",
+    //        Accept: "/",
+    //        "Cache-Control": "no-cache",
+    //        Cookie: "uuid="+state.uuid,
+    //
+    //      },
+    //      credentials: "same-origin",
+    //    };
+    //    console.log("config", axiosConfig);
+    //    const step_response = await instance.post(
+    //      "/api/submitscores",
+    //      step,
+    //      axiosConfig
+    //    );
+    //    console.log("step_response:", step_response);
   } catch (error) {
     console.log(error);
   }
@@ -210,7 +260,16 @@ const final_submit_results = (dispatch) => async (state) => {
       stations: state.stations,
     };
     console.log("final_results\n", final_results);
-    const response = await instance.post("/api/submitscores", final_results);
+    const config = {
+      headers: {
+        uuid: state.uuid,
+      },
+    };
+    const response = await instance.post(
+      "/api/submitscores",
+      final_results,
+      config
+    );
     console.log(response);
     dispatch({ type: "final_submit_results", payload: 1 });
   } catch (err) {
@@ -244,6 +303,72 @@ const survey_name = (dispatch) => (name) => {
   dispatch({ type: "survey_name", payload: name });
 };
 
+const begin_event = (dispatch) => async (state) => {
+  try {
+    const bodyContent = JSON.stringify({
+      names: state.names,
+      date: state.date,
+    });
+      let headersList = {
+         "Accept": "*/*",
+         "Content-Type": "application/json",
+         "credentials": "include",
+        }
+
+      await fetch("http://127.0.0.1:5000/api/begin", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList,
+    }).then(res => {
+          console.log(res.headers.get('set-cookie')); // undefined
+          console.log(document.cookie); // nope
+          return res.json();
+        }).then(json => {
+        });
+      // .then(function (response) {
+      //     console.log(response.text());
+      // })
+      // .then(function (data) {
+      //   console.log(data);
+      // });
+
+    // const axiosConfig = {
+    //   headers: {
+    //     "content-Type": "application/json",
+    //     Accept: "/",
+    //     "Cache-Control": "no-cache",
+    //     Cookie: "uuid=" + state.uuid,
+    //   },
+    //   // credentials: "same-origin",
+    // };
+    // const response = await instance.post("/api/begin", begin_data, axiosConfig);
+    //console.log(response.data);
+    //const response = await fetch("http://localhost:5000/api/begin", {
+    //  method: "POST",
+    //  body: JSON.stringify(begin_data),
+    //  headers: {
+    //    "Content-Type": "application/json",
+    //  },
+    //  credentials: "same-origin",
+    //});
+    //
+    // const response = await fetch("http://localhost:5000/api/begin", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     //"Access-Control-Allow-Origin": "localhost:3000",
+    //   },
+    //   credentials: "same-origin",
+    //   body: JSON.stringify(begin_data),
+    // })
+    // console.log("begin_response", response);
+    dispatch({ type: "begin", payload: "" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   eventReducer,
   {
@@ -255,6 +380,7 @@ export const { Provider, Context } = createDataContext(
     update_names,
     final_submit_results,
     get_leaderboard,
+    begin_event,
   },
   {
     position: 0,
@@ -273,18 +399,19 @@ export const { Provider, Context } = createDataContext(
         */
     // date: "YYYY-MM-DD",
     // date: "2021-12-03",
-    date: "2022-25-22",
+    date: "2022-11-02",
     leaderboard: [],
     gScore: {
       curScore: 0,
       totScore: 150,
     },
+    uuid: "",
     names: {
-      name1: "",
-      name2: "",
-      name3: "",
-      name4: "",
-      instructor: "",
+      name1: "a",
+      name2: "a",
+      name3: "a",
+      name4: "a",
+      instructor: "t",
     },
     stations: shuffle([
       {
@@ -305,7 +432,7 @@ export const { Provider, Context } = createDataContext(
         answer1: "",
         answer2: "",
         c_answer1: "C",
-          c_answer2: "D",
+        c_answer2: "D",
         score1: 0,
         score2: 0,
         attempt: 0,

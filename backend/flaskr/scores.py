@@ -16,9 +16,12 @@ import sqlite3
 from flaskr.db import get_db
 from flask_cors import CORS  # comment on deployment
 
+
 bp = Blueprint("/api", __name__, url_prefix="/api")
+CORS(bp, support_credentials=True, expose_headers="Cookie")
 
 # NEED TESTS.
+
 
 # This route makes a cookie when the user begins the scavenger hunt. It will assign a UUID to the user's cookie.
 @bp.route("/begin", methods=["POST"])
@@ -35,31 +38,32 @@ def start():
             try:
                 content = dict(request.json)
                 namesDict = content["names"]
-                
+
                 # Generate UUID.
                 uuid = str(uuid.uuid4())
 
                 # Drop cookie onto user's browser.
                 response = jsonify({"uuid": uuid})
                 response.set_cookie("uuid", uuid)
-                
+                response.headers.add('Access-Control-Allow-Origin', '*')
+
                 # Connect to database.
                 db = get_db()
                 # Insert UUID into database.
                 db.execute(
-                            "INSERT INTO user (uuid, username, user2, user3, user4, instructor, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                            (
-                                uuid,
-                                namesDict["name1"],
-                                namesDict["name2"],
-                                namesDict["name3"],
-                                namesDict["name4"],
-                                namesDict["instructor"],
-                                content["date"],
-                            ),
+                    "INSERT INTO user (uuid, username, user2, user3, user4, instructor, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    (
+                        uuid,
+                        namesDict["name1"],
+                        namesDict["name2"],
+                        namesDict["name3"],
+                        namesDict["name4"],
+                        namesDict["instructor"],
+                        content["date"],
+                    ),
                 ),
 
-                db.commit() 
+                db.commit()
 
                 # print("got here2!")
                 return response
@@ -69,18 +73,19 @@ def start():
                 error = "Someone with that name has already submitted!"
                 return (error, 500)
 
+
 def return_station_data(db, user_uuid):
-        response = []
+    response = []
 
-        stations = db.execute(
-            "SELECT * FROM stations WHERE uuid = '{}'".format(user_uuid)
-        ).fetchall()
+    stations = db.execute("SELECT * FROM stations WHERE uuid = '{}'".format(
+        user_uuid)).fetchall()
 
-        # Convert to list of dictionaries for each station.
-        for item in stations:
-                response.append({k: item[k] for k in item.keys()})
+    # Convert to list of dictionaries for each station.
+    for item in stations:
+        response.append({k: item[k] for k in item.keys()})
 
-        return response
+    return response
+
 
 def calculate_score(db, user_uuid):
     score = 0.0
@@ -93,13 +98,15 @@ def calculate_score(db, user_uuid):
 
     return score, total
 
+
 # I don't remember what the SQL command to update a field is.
 def update_scores(db, user_uuid):
     score, tot = calculate_score(db, user_uuid)
 
-    # insert SQL push 
+    # insert SQL push
 
-    return ("", 200)    
+    return ("", 200)
+
 
 # This should take the submissions, one at a time. Though, it can take more than
 # one at a time, if necessary.
@@ -107,8 +114,10 @@ def update_scores(db, user_uuid):
 def submit_scores():
     if request.method == "POST":
         # You need a cookie.
+        print(request.json)
+        print(request.headers)
         if request.cookies.get('uuid') == None:
-            return("", 405)
+            return ("", 405)
 
         user_uuid = request.cookies.get('uuid')
         content = dict(request.json)
@@ -215,7 +224,7 @@ def submit():
 # The user has already started the scavenger hunt.
 def reload_session(user_uuid):
     # Check the database for the user's information.
-    try: 
+    try:
         data = []
 
         db = get_db()
@@ -223,9 +232,8 @@ def reload_session(user_uuid):
         db.row_factory = sqlite3.Row
 
         # There should only be one entry per uuid...
-        res = db.execute(
-            "SELECT * FROM user WHERE uuid = '{}'".format(user_uuid)
-        ).fetchone()
+        res = db.execute("SELECT * FROM user WHERE uuid = '{}'".format(
+            user_uuid)).fetchone()
 
         # Convert result to dictionary. Append to data list.
         data.append(dict(res))
@@ -239,6 +247,5 @@ def reload_session(user_uuid):
         return jsonify(data)
 
     except db.DatabaseError:
-            error = "Could not find the entry in the database!"
-            return (error, 500)
-
+        error = "Could not find the entry in the database!"
+        return (error, 500)
