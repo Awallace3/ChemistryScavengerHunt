@@ -7,13 +7,16 @@ import {Context as EventContext } from '../context/EventContext';
 import EventQuestion from '../components/EventQuestion';
 
 function Event() {
-    const { state, final_submit_results }  = useContext(EventContext)
+    const { state, final_submit_results, begin_event }  = useContext(EventContext)
     const history = useHistory();
 
     const [isDisabled, setIsDisabled] = useState(false)
     const handleSubmitClicked = () => {
         setIsDisabled(true)
     }
+    useEffect(() => {
+        begin_event(state)
+    }, [])
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsDisabled(false)
@@ -34,7 +37,7 @@ function Event() {
           <div className="event-score-container">
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
-          <EventQuestion/>
+          {state.stations.length > 0 ? <EventQuestion/>: <p>You have already completed all your questions!</p>}
             {
               state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null
             }
@@ -69,7 +72,7 @@ function Event() {
             <p>Score: {state.gScore.curScore} / {state.gScore.totScore}</p>
           </div>
 
-          <EventQuestion/>
+          {state.stations.length > 0 ? <EventQuestion/>: <p>You have already completed all your questions! Please check the Leaderboard for your score!</p>}
 
           {
               state.api_status == 1 ? <p style={{color: 'green'}}>Successfully submitted results!</p> : null

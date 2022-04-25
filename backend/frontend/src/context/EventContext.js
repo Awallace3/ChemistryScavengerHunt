@@ -153,7 +153,26 @@ const eventReducer = (state, action) => {
     case "final_submit_results":
       return { ...state, api_status: action.payload };
     case "begin":
-      return { ...state, uuid: action.payload };
+      console.log("d:", action.payload);
+      if (Array.isArray(action.payload)) {
+        var stat = [...state.stations];
+        for (let i = 0; i < action.payload.length; i++) {
+          const el = action.payload[i];
+          var pops = [];
+          for (let j = 0; j < stat.length; j++) {
+            if (stat[j].station == el.station) {
+              pops.splice(0, 0, j,);
+            }
+          }
+          for (let j = 0; j < pops.length; j++) {
+            stat.splice(pops[j], 1);
+          }
+        }
+        console.log("stat:", stat);
+        return { ...state, stations: stat };
+      } else {
+        return { ...state, uuid: action.payload };
+      }
     case "get_leaderboard":
       if (action.payload) {
         var sor = action.payload.sort((a, b) =>
@@ -365,12 +384,14 @@ const begin_event = (dispatch) => async (state) => {
       body: bodyContent,
       headers: headersList,
     })
-      // console.log('res', response)
-      .then((res) => {
-        //let cookie = res.headers;
-        console.log("cookie:", res.json());
-        return res;
-      });
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: "begin", payload: data }));
+    // dispatch({ type: "begin", payload: "" });
+    // console.log('res', response)
+    // .then((res) => {
+    //   //let cookie = res.headers;
+    //   return res;
+    // });
     //.then(function (data) {
     //  console.log(data);
     //});
@@ -412,7 +433,6 @@ const begin_event = (dispatch) => async (state) => {
     //   body: JSON.stringify(begin_data),
     // })
     // console.log("begin_response", response);
-    dispatch({ type: "begin", payload: "" });
   } catch (err) {
     console.log(err);
   }
