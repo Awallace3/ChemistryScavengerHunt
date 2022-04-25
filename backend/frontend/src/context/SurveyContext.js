@@ -6,7 +6,7 @@ const eventReducer = (state, action) => {
         case "survey_name":
             return {...state, name: action.payload}
         case "u_q":
-            let u_qs = state.qs 
+            let u_qs = state.qs
             u_qs[action.payload.pos] = parseInt(action.payload.q)
             return {...state, qs: u_qs }
         case "u_improvements":
@@ -49,21 +49,21 @@ const submit_survey = (dispatch) => async (state) => {
 
 export const { Provider, Context } = createDataContext(
     eventReducer,
-    { 
+    {
         u_name,
         u_q,
         u_improvements,
         submit_survey
     },
-    { 
+    {
         api_status: 0,
         name: "",
         qs: {
-            q1: 1,
-            q2: 1,
-            q3: 1,
+            q1: 3,
+            q2: 3,
+            q3: 3,
         },
         improvements: ""
     }
-) 
+)
 
