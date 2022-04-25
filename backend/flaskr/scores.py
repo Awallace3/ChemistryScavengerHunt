@@ -1,4 +1,3 @@
-from tkinter import N
 from flask import (Blueprint, flash, g, json, redirect, render_template,
                    request, session, url_for, jsonify, make_response)
 
@@ -9,12 +8,18 @@ from flask_cors import CORS  # comment on deployment
 
 bp = Blueprint("/api", __name__, url_prefix="/api")
 CORS(bp,
-     origins=[
-         "http://localhost:3000", "http://localhost:3000/Event",
-         "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
-         "http://chemscav.com", "http://chemscav.com/Event"
-         "http://194.195.211.203:443", "http://194.195.211.203:443"
-     ],
+#      origins=[
+#          "http://localhost:3000", "http://localhost:3000/Event",
+#          "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+#          "http://chemscav.com", "http://chemscav.com/Event"
+#          "http://194.195.211.203:443", "http://194.195.211.203:443"
+#      ],
+         origins=[
+             "http://localhost:3000", "http://localhost:3000/Event",
+             "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
+             "https://chemscav.com", "https://chemscav.com/Event"
+             "https://194.195.211.203:443", "https://194.195.211.203:443/Event"
+         ],
      support_credentials=True,
      expose_headers=["Cookie", 'set-cookie'])
 # CORS(bp,
