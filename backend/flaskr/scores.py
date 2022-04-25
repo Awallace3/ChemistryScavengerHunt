@@ -202,6 +202,7 @@ def submit():
 
         db = get_db()
         error = None
+        print(request.json)
 
         if error is None:
             try:
