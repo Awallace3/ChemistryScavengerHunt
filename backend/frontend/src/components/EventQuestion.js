@@ -27,6 +27,7 @@ const EventQuestion = () => {
     next_question,
     count_total_score,
   } = useContext(EventContext);
+    console.log("corrects:", state.correct1, state.correct2)
 
   const station = state.stations[state.position];
   function submission() {
@@ -179,7 +180,7 @@ const EventQuestion = () => {
                 />
                 E
               </label>
-              {eval_to_user(attempts, state.correct1)}
+              {eval_to_user(attempts, state.correct2)}
               <div></div>
             </form>
             {/*
@@ -431,7 +432,7 @@ const EventQuestion = () => {
                 E
               </label>
 
-              {eval_to_user(attempts, state.correct1)}
+              {eval_to_user(attempts, state.correct2)}
 
               <div></div>
             </form>
