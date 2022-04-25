@@ -14,7 +14,7 @@ CREATE TABLE user (
 );
 
 CREATE TABLE stations (
-  username TEXT,
+  uuid TEXT,
   clue TEXT,
   station TEXT,
   answer1 TEXT,
@@ -25,7 +25,7 @@ CREATE TABLE stations (
   score2 INTEGER,
   attempt INTEGER,
   percentError REAL,
-  FOREIGN KEY (username) REFERENCES user (username)
+  FOREIGN KEY (uuid) REFERENCES user (uuid)
 );
 
 CREATE TABLE survey (
