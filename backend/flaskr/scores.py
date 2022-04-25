@@ -8,12 +8,6 @@ from flask_cors import CORS  # comment on deployment
 
 bp = Blueprint("/api", __name__, url_prefix="/api")
 CORS(bp,
-#      origins=[
-#          "http://localhost:3000", "http://localhost:3000/Event",
-#          "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"
-#          "http://chemscav.com", "http://chemscav.com/Event"
-#          "http://194.195.211.203:443", "http://194.195.211.203:443"
-#      ],
          origins=[
              "http://localhost:3000", "http://localhost:3000/Event",
              "http://127.0.0.1:3000", "http://127.0.0.1:3000/Event"

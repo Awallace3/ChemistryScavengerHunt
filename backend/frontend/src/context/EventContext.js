@@ -152,6 +152,7 @@ const eventReducer = (state, action) => {
       return { ...state, names: u_names };
     case "final_submit_results":
       return { ...state, api_status: action.payload };
+
     case "begin":
       console.log("d:", action.payload);
       if (Array.isArray(action.payload)) {
@@ -161,7 +162,7 @@ const eventReducer = (state, action) => {
           var pops = [];
           for (let j = 0; j < stat.length; j++) {
             if (stat[j].station == el.station) {
-              pops.splice(0, 0, j,);
+              pops.splice(0, 0, j);
             }
           }
           for (let j = 0; j < pops.length; j++) {
@@ -169,7 +170,22 @@ const eventReducer = (state, action) => {
           }
         }
         console.log("stat:", stat);
-        return { ...state, stations: stat };
+        var first = action.payload[0];
+        var names = {
+          name1: first.username,
+          name2: first.user2,
+          name3: first.user3,
+          name4: first.user4,
+          instructor: first.instructor,
+        };
+        var curscore = {
+          curScore: first.curscore,
+          totScore: 100,
+        };
+        console.log(names);
+        console.log(curscore);
+
+        return { ...state, stations: stat, names: names, gScore: curscore };
       } else {
         return { ...state, uuid: action.payload };
       }
@@ -468,7 +484,7 @@ export const { Provider, Context } = createDataContext(
         */
     // date: "YYYY-MM-DD",
     // date: "2021-12-03",
-    date: "2022-11-02",
+    date: "2022-04-25",
     leaderboard: [],
     gScore: {
       curScore: 0,

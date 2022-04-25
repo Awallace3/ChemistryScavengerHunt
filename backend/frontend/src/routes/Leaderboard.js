@@ -12,7 +12,9 @@ function Leaderboard() {
     get_leaderboard();
     console.log(state.leaderboard);
   }, []);
-    console.log(state.leaderboard)
+    console.log('leaders unite', state.leaderboard)
+    console.log("names:", state.names)
+
 
   const listLeaderboard = () =>
     state.leaderboard.map((group) => (
