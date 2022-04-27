@@ -17,10 +17,11 @@ function Home() {
   }
   const [needName, setNeedName] = useState(false)
   const history = useHistory();
-  const begin = () => {
+  const begin = async () => {
+      //TODO: ensure async await works correctly
     if ( state.names.name1 !== '' ){
       setNeedName(false)
-      begin_event(state)
+      await begin_event(state)
       history.push('/Event')
     } else {
       setNeedName(true)
