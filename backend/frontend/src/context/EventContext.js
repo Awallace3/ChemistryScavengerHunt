@@ -50,6 +50,7 @@ const eventReducer = (state, action) => {
       let a1 = false;
       let a2 = false;
       let u_stations2 = state.stations;
+      let uscores = state.gScore
 
       if (
         state.stations[state.position].answer1 ===
@@ -67,6 +68,7 @@ const eventReducer = (state, action) => {
             default:
               u_stations2[state.position].score1 = 1;
           }
+          uscores.curScore += u_stations2[state.position].score1
         }
       }
       if (
@@ -85,7 +87,9 @@ const eventReducer = (state, action) => {
             default:
               u_stations2[state.position].score2 = 1;
           }
+          uscores.curScore += u_stations2[state.position].score2
         }
+
       }
       // a2 = eval_math(
       //   state.stations[state.position].answer2,
@@ -112,6 +116,7 @@ const eventReducer = (state, action) => {
         complete = true;
       }
       // 2% error
+
       return {
         ...state,
         stations: u_stations2,
@@ -122,6 +127,8 @@ const eventReducer = (state, action) => {
     case "next_question":
       let u_stations3 = state.stations;
       u_stations3[state.position].attempts = action.payload.attempts;
+    //let uScore = state.gScore
+    //      uScore +=
       if (state.position < state.stations.length - 1) {
         return {
           ...state,
@@ -145,6 +152,10 @@ const eventReducer = (state, action) => {
         u_gScore.curScore += state.stations[i].score2;
       }
       return { ...state, gScore: u_gScore };
+    case  "update_total_score":
+          var uscore = state.gScore
+          uscore.curScore += action.payload
+          return {...state, gScore: uscore}
 
     case "update_names":
       var u_names = state.names;
@@ -221,9 +232,6 @@ const next_question = (dispatch) => async (attempts, state) => {
   try {
     // const response = await instance.post('/api/end/point', progress);
     const step = {
-      // date: state.date,
-      // gScore: state.gScore,
-      // names: state.names,
       stations: [state.stations[state.position]],
     };
     console.log("step\n", step);
@@ -232,7 +240,6 @@ const next_question = (dispatch) => async (attempts, state) => {
       Accept: "*/*",
       "Content-Type": "application/json",
       credentials: "same-origin",
-      // mode: "include",
     };
 
     let bodyContent = JSON.stringify(step);
@@ -242,45 +249,6 @@ const next_question = (dispatch) => async (attempts, state) => {
       headers: headersList,
     });
     console.log("res", response);
-    //.then((res) => {
-    //  let cookie = res.headers;
-    //  console.log("cookie:", res);
-    //  return res.text();
-    //})
-    //.then(function (data) {
-    //  console.log(data);
-    //});
-
-    //const response = await fetch("http://localhost:5000/api/submitscores", {
-    //  mode: "no-cors",
-    //  method: "POST",
-    //  headers: {
-    //    Accept: "application/json",
-    //    "Content-Type": "application/json",
-    //    "Access-Control-Allow-Origin": "localhost:3000",
-    //  },
-    //  credentials: "same-origin",
-    //  body: JSON.stringify(step),
-    //});
-    //console.log("step_response", response);
-
-    //    const axiosConfig = {
-    //      headers: {
-    //        "content-Type": "application/json",
-    //        Accept: "/",
-    //        "Cache-Control": "no-cache",
-    //        Cookie: "uuid="+state.uuid,
-    //
-    //      },
-    //      credentials: "same-origin",
-    //    };
-    //    console.log("config", axiosConfig);
-    //    const step_response = await instance.post(
-    //      "/api/submitscores",
-    //      step,
-    //      axiosConfig
-    //    );
-    //    console.log("step_response:", step_response);
   } catch (error) {
     console.log(error);
   }
@@ -290,6 +258,10 @@ const next_question = (dispatch) => async (attempts, state) => {
 const count_total_score = (dispatch) => () => {
   dispatch({ type: "count_total_score" });
 };
+
+const update_total_score = (dispatch) => (new_pts) => {
+    dispatch({type: "update_total_score", payload: new_pts})
+}
 
 const update_names = (dispatch) => (u_name, name_num) => {
   dispatch({ type: "update_names", payload: { u_name, name_num } });
@@ -466,6 +438,7 @@ export const { Provider, Context } = createDataContext(
     final_submit_results,
     get_leaderboard,
     begin_event,
+    update_total_score
   },
   {
     position: 0,

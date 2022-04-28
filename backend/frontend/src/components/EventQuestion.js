@@ -33,7 +33,7 @@ const EventQuestion = () => {
   function submission() {
     setAttempts(attempts + 1);
     submit_answers(attempts);
-    count_total_score();
+    // count_total_score();
   }
 
   if (isMobile) {
