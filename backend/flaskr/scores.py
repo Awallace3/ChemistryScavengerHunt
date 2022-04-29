@@ -57,7 +57,7 @@ def make_cookie(request):
         # Drop cookie onto user's browser.
         # response = jsonify({"uuid": uuid})
         response = make_response(jsonify({"uuid": uuid}))
-        response.set_cookie("uuid", uuid)
+        response.set_cookie("uuid", uuid, max_age=60 * 60 * 24 * 365)
         # response.headers.add('Access-Control-Allow-Origin', '*')
 
         # Connect to database.
